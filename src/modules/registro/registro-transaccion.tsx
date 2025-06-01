@@ -25,7 +25,7 @@ import type { ITransaccion } from "../../interface/IRegistro-transaccion";
 import axios from "axios";
 
 //Importacion de URI API
-const uriAgregaTransaccion = import.meta.env.VITE_API_REGISTRO_USUARIO;
+const uriAgregaTransaccion = import.meta.env.VITE_API_REGISTRO_TRANSACCIONES;
 
 const FormRegistroTransaccion: React.FC<Iform> = () => {
 
@@ -74,7 +74,7 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                 datoTransaccion
             });
 
-            alert(`Se registrO la transaccion con el numero ${response.data.data.id} sastifactoriamente`);
+            alert( response.data.message );
             clearForm();
 
         } catch( err) {

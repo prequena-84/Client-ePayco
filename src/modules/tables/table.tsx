@@ -2,29 +2,31 @@ import React from "react";
 
 import H1 from "../../components/title/h1";
 
-import type { dataUser } from "../../interface/tables/Itable-users";
 
-const TableUsers: React.FC<dataUser> = ( {dataUser} ) => {
+import type { IReporteTransaccion,datoReporte } from "../../interface/reporte/IReporte-transaccion";
 
-    let data:dataUser[] = []
+const TableUsers: React.FC<IReporteTransaccion> = ( {dataTransaccion} ) => {
 
-    if (dataUser) {
 
-        /*data = dataUser.map( ({idUsuario,Password,userName,Nombres,Apellidos,Email,WhastApp}) => {
-            return {
-                idUsuario,
-                userName,
-                Nombres,
-                Apellidos,
-                Email,
-                WhastApp,
-                Password,
-            };
-        });*/
-    } else {
-        data = [];
-    }
+        dataTransaccion.map((item) => {
+            console.log(item)
+        })
 
+
+
+    /*const data = dataUser.map( ({idUsuario,Password,userName,Nombres,Apellidos,Email,WhastApp}) => {
+        return {
+            idUsuario,
+            userName,
+            Nombres,
+            Apellidos,
+            Email,
+            WhastApp,
+            Password,
+        };
+    });*/
+
+    const data:[] = []
     const title = data.map( item => Object.keys(item) )[0];
 
     return (

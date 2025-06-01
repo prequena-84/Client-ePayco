@@ -25,7 +25,7 @@ const uriAgregarUsuatio = import.meta.env.VITE_API_REGISTRO_USUARIO;
 
 const FormRegistroUsuario: React.FC<Iform> = () => {
 
-    const [ dataUser, setDataUser ] = useState<IUser>({
+    const [ datoUsuario, setDatoUsuario ] = useState<IUser>({
         documento:'',
         nombre:'',
         email:'',
@@ -35,14 +35,14 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
 
-        setDataUser( prevDataUser  => ({
-            ...prevDataUser,
+        setDatoUsuario( prevDatoUsuario  => ({
+            ...prevDatoUsuario,
             [name]:value
         }));
     };
 
     const clearForm = () => {
-        setDataUser({
+        setDatoUsuario({
             documento:'',
             nombre:'',
             email:'',
@@ -55,10 +55,11 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
 
         try {
             const response = await axios.post(uriAgregarUsuatio, {
-                dataUser
+                datoUsuario
             });
 
-            alert(`Se registro el usuario ${response.data.data.userName} sastifactoriamente`);
+            console.log(response)
+            alert( response.data.message );
             clearForm();
 
         } catch( err) {
@@ -68,8 +69,6 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                     // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
                     console.error('Error de respuesta:', err.response.data);
                     console.error('Código de estado:', err.response.status);
-
-                    alert( err.response.data.message === 'No Autorizado' ? `Credenciales Invalidas: ${err.response.data.message}`: '' )
 
                 } else if (err.request) {
                     // La solicitud se realizó pero no se recibió respuesta
@@ -96,7 +95,7 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                         id="documento"
                         placeHolder="Documento"
                         arialLabel="documento"
-                        value={dataUser.documento}
+                        value={datoUsuario.documento}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
@@ -109,7 +108,7 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                         id="nombre"
                         placeHolder="Nombre"
                         arialLabel="nombre"
-                        value={dataUser.nombre}
+                        value={datoUsuario.nombre}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
@@ -123,7 +122,7 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                         type="email"
                         placeHolder="Correo"
                         arialLabel="email"
-                        value={dataUser.email}
+                        value={datoUsuario.email}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
@@ -136,7 +135,7 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                         id="celular"
                         placeHolder="Celular"
                         arialLabel="celular"
-                        value={dataUser.celular}
+                        value={datoUsuario.celular}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
