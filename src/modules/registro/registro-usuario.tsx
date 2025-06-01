@@ -6,8 +6,6 @@ import Form from "../../components/form/form";
 import Fieldset from "../../components/form/fieldset";
 import Div from "../../components/contenedores/Div";
 import Legend from "../../components/form/legend";
-import InputUsername from "../../components/input/input-username";
-import InputPassword from "../../components/input/input-password";
 import BtnOutLine from "../../components/botton/btn-outline";
 import BtnLine from "../../components/botton/btn-line";
 import Input from "../../components/input/input";
@@ -16,24 +14,22 @@ import Input from "../../components/input/input";
 import stylesFormLogin from "../../css/module/login/login-registro.module.css";
 
 // Importacion de interfaces
-import type { ILogin } from "../../interface/ILogin";
-import type { IUser } from "../../interface/IRegistro";
+import type { Iform } from "../../interface/IForms/IForms";
+import type { IUser } from "../../interface/IRegistro-usuario";
 
 // Importacion de hook axios para hacer peticiones al servidor
 import axios from "axios";
 
 //Importacion de URI API
-const uriAddUser = import.meta.env.VITE_API_ADD_USER;
+const uriAgregarUsuatio = import.meta.env.VITE_API_REGISTRO_USUARIO;
 
-const FormRegistro: React.FC<ILogin> = () => {
+const FormRegistroUsuario: React.FC<Iform> = () => {
+
     const [ dataUser, setDataUser ] = useState<IUser>({
-            idUsuario:'',
-            userName:'',
-            Password:'',
-            Nombres:'',
-            Apellidos:'',
-            Email:'',
-            WhastApp:'',
+        documento:'',
+        nombre:'',
+        email:'',
+        celular:'',
     });
 
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
@@ -47,13 +43,10 @@ const FormRegistro: React.FC<ILogin> = () => {
 
     const clearForm = () => {
         setDataUser({
-            idUsuario:'',
-            userName:'',
-            Password:'',
-            Nombres:'',
-            Apellidos:'',
-            Email:'',
-            WhastApp:'',
+            documento:'',
+            nombre:'',
+            email:'',
+            celular:'',
         });
     };
     
@@ -61,12 +54,13 @@ const FormRegistro: React.FC<ILogin> = () => {
         e.preventDefault();  
 
         try {
-            const response = await axios.post(uriAddUser, {
+            const response = await axios.post(uriAgregarUsuatio, {
                 dataUser
             });
 
             alert(`Se registro el usuario ${response.data.data.userName} sastifactoriamente`);
             clearForm();
+
         } catch( err) {
             if (axios.isAxiosError(err)) {
                 // Si el error es un error de Axios
@@ -92,94 +86,57 @@ const FormRegistro: React.FC<ILogin> = () => {
     };
 
     return (
-        <Form key="formulario-login" onSubmit={handleSubmit} className={stylesFormLogin["container-Form"]}>
+        <Form key="formulario-login" onSubmit={handleSubmit} className={`${stylesFormLogin["container-Form"]} main-content`}>
             <Fieldset className={stylesFormLogin.containerFieldset}>
-                <Div key="idUsuario">
-                    <Legend key="titulo" text={"Registro de Usuario"}/>
+                <Legend key="titulo" text={"Registro de Usuario"}/>
+                <Div key="documento">
                     <Input
-                        key="input"
-                        name="idUsuario"
-                        id="idUsuario"
-                        placeHolder="ID"
-                        arialLabel="idUsuario"
-                        value={dataUser.idUsuario}
+                        key="inpdocumentout"
+                        name="documento"
+                        id="documento"
+                        placeHolder="Documento"
+                        arialLabel="documento"
+                        value={dataUser.documento}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
                     />
                 </Div>
-                <Div key="userName">
-                    <InputUsername
-                        key="userName"
-                        name="userName"
-                        id="userName"
-                        placeHolder="Usuario"
-                        arialLabel="Usuario"
-                        value={dataUser.userName}
+                <Div key="nombre">
+                    <Input
+                        key="nombre"
+                        name="nombre"
+                        id="nombre"
+                        placeHolder="Nombre"
+                        arialLabel="nombre"
+                        value={dataUser.nombre}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
                     />
                 </Div>
-                <Div key="Nombres">
+                <Div key="email">
                     <Input
-                        key="Nombres"
-                        name="Nombres"
-                        id="Nombres"
-                        placeHolder="Nombres"
-                        arialLabel="Nombres"
-                        value={dataUser.Nombres}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="Apellidos">
-                    <Input
-                        key="Apellidos"
-                        name="Apellidos"
-                        id="Apellidos"
-                        placeHolder="Apellidos"
-                        arialLabel="Apellidos"
-                        value={dataUser.Apellidos}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="Email">
-                    <Input
-                        key="Email"
-                        name="Email"
-                        id="Email"
+                        key="email"
+                        name="email"
+                        id="email"
                         type="email"
                         placeHolder="Correo"
-                        arialLabel="Email"
-                        value={dataUser.Email}
+                        arialLabel="email"
+                        value={dataUser.email}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
                     />
                 </Div>
-                <Div key="Password">
-                    <InputPassword
-                        name="Password"
-                        id="Password"
-                        className={stylesFormLogin.containerInputPassword}
-                        classInput={stylesFormLogin.inputPassword}
-                        placeHolder="Contraseña"
-                        value={dataUser.Password}
-                        onChange={(e) => handleChange(e) }
-                    />
-                </Div>
-                <Div key="WhastApp">
+                <Div key="celular">
                     <Input
-                        key="WhastApp"
-                        name="WhastApp"
-                        id="WhastApp"
-                        placeHolder="WhastApp"
-                        arialLabel="WhastApp"
-                        value={dataUser.WhastApp}
+                        key="celular"
+                        name="celular"
+                        id="celular"
+                        placeHolder="Celular"
+                        arialLabel="celular"
+                        value={dataUser.celular}
                         onChange={ (e) => handleChange(e) }
                         className={stylesFormLogin.containerInputUserName}
                         classInput={stylesFormLogin.inputUserName}
@@ -188,7 +145,7 @@ const FormRegistro: React.FC<ILogin> = () => {
                 <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
                     <BtnOutLine 
                         key="ingresar"
-                        text={"Ingresar"}
+                        text={"Registrar"}
                         type={"submit"}
                         sizes={"btn-lg"}
                         className={stylesFormLogin.btnIngresar}
@@ -206,4 +163,4 @@ const FormRegistro: React.FC<ILogin> = () => {
     );
 };
 
-export default FormRegistro;
+export default FormRegistroUsuario;

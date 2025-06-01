@@ -10,8 +10,6 @@
     align-items:     center;
     padding:         1.5rem ;
     background-color: var( --colorBlanco );
-
-    border: solid 1px black
 }
 
 .containerFieldset {

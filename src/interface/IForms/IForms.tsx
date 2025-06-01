@@ -4,7 +4,8 @@ interface Iform {
     key?:string | undefined;
     children?:ReactNode;
     onSubmit?:FormEventHandler<HTMLFormElement>;
-    className?: string | undefined
+    className?: string | undefined;
+    onLoginSuccess?: () => void;
 };
 
 export type {

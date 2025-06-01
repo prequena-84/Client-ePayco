@@ -4,13 +4,14 @@ interface IInputGroupText {
     key?:string | undefined;
     name:string;
     id:string;
-    type?: "text" | "password" | "email" | "url" | "number" | "date" | "checkbox" | "radio" | "radio" | "file" | "submit";
+    type?: "text" | "number" | "password" | "email" | "url" | "number" | "date" | "checkbox" | "radio" | "radio" | "file" | "submit";
     className?:string;
     classInput?:string;
     placeHolder?:string;
     arialLabel?:string;
     value:string | number | undefined;
     onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
+    disabled?:boolean;
 }
 
 export type {

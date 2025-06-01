@@ -1,3 +1,32 @@
-/*:root {
-  
-}*/
+#root {
+  --fondoForm:     #f6f5f7;
+  --fondoAsideLog: #ff416c;
+  --fondoAsideReg: #be4bdb;
+  --colorBlanco:   white;
+}
+
+* {
+    margin:     0;
+    padding:    0;
+    box-sizing: border-box; /* Asegura que el padding y el border no afecten el tamaño total */
+}
+
+html {
+  height: 95%;   /* Asegura que el body ocupe toda la altura de la ventana */
+}
+
+body {
+  height:   95%;
+  margin:   0;
+  padding:  0;
+  font-family: sans-serif;
+}
+
+.navbar {
+  z-index: 1050; /* Asegura que esté por encima del contenido */
+}
+
+.main-content {
+  margin-top: 40px; /* Altura del navbar */
+  padding:    1rem;
+}

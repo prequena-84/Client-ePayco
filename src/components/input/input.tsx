@@ -13,6 +13,7 @@ const Input:React.FC<IInputGroupText> = ({
     value, 
     className = undefined,
     classInput = undefined,
+    disabled = false,
 }) => {
     
     return (
@@ -26,6 +27,7 @@ const Input:React.FC<IInputGroupText> = ({
                 placeholder={placeHolder} 
                 aria-label={arialLabel} 
                 aria-describedby="basic-addon1"
+                disabled={disabled}
             />
         </div>
     );

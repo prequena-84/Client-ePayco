@@ -5,17 +5,25 @@ import H1 from "../../components/title/h1";
 import type { dataUser } from "../../interface/tables/Itable-users";
 
 const TableUsers: React.FC<dataUser> = ( {dataUser} ) => {
-    const data = dataUser.map( ({idUsuario,Password,userName,Nombres,Apellidos,Email,WhastApp}) => {
-        return {
-            idUsuario,
-            userName,
-            Nombres,
-            Apellidos,
-            Email,
-            WhastApp,
-            Password,
-        };
-    });
+
+    let data:dataUser[] = []
+
+    if (dataUser) {
+
+        /*data = dataUser.map( ({idUsuario,Password,userName,Nombres,Apellidos,Email,WhastApp}) => {
+            return {
+                idUsuario,
+                userName,
+                Nombres,
+                Apellidos,
+                Email,
+                WhastApp,
+                Password,
+            };
+        });*/
+    } else {
+        data = [];
+    }
 
     const title = data.map( item => Object.keys(item) )[0];
 
@@ -65,7 +73,7 @@ const TableUsers: React.FC<dataUser> = ( {dataUser} ) => {
                     </tbody>
                 </table>
             ) : (
-                <H1 text="Cargando datos del usuarios"/>
+                <H1 text="No hay transacciones registradas"/>
             )}
         </>
     );
