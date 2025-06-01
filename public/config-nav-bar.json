@@ -1,0 +1,20 @@
+[
+    {
+        "menu": "Inicio",
+        "submenu":[
+            {
+                "label": "Inicio",
+                "link": "/"
+            }
+        ]
+    },
+    {
+        "menu": "Usuario",
+        "submenu":[
+            {
+                "label": "Actualizacion de datos",
+                "link": "/update-user"
+            }
+        ]
+    }
+]

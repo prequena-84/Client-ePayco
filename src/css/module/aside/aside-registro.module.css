@@ -1,0 +1,27 @@
+.container-Aside {
+    flex:            1;
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    justify-content: center;
+    padding:         1.5rem ;
+    gap:             1.5rem;
+    background:      var( --fondoAsideReg );
+    color:           var( --colorBlanco );
+}
+
+.container-btn-registro {
+    width: 75%;
+}
+
+.btn-registro {
+    color:         var( --colorBlanco ) !important;
+    border:        solid 1px var( --colorBlanco ) !important;
+    border-radius: 1.5rem !important;
+}
+
+.btn-registro:hover {
+    background-color: var( --colorBlanco ) !important;
+    color:            var( --fondoAsideReg ) !important;
+    border:           solid 1px var(--colorBlanco);
+}

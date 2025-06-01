@@ -1,0 +1,47 @@
+.container-section {
+    display:flex;
+    height: 100vh;
+}
+
+.container-Form {
+    flex:             1.5;
+    display:          flex;
+    justify-content:  center;
+    align-items:      center;
+    padding:          1.5rem ;
+    background-color: var( --fondoForm );
+}
+
+.containerFieldset {
+    width: 30vw;
+}
+
+.containerInputUserName, .containerInputPassword {
+    margin-top: 1rem;
+}
+
+.inputUserName, .inputPassword {
+    background-color: var( --colorBlanco ) !important;
+}
+
+.container-olvidates-password {
+    display:         flex;
+    justify-content: center;
+    align-items:     center;
+    margin-top:      1rem;
+}
+
+.container-btn-login {
+    display:         flex;
+    justify-content: space-around;
+    align-items:     center;
+    margin-top:      1rem;;
+}
+
+.btnIngresar {
+    width: 14vw;
+}
+
+.btnLimpiar {
+    width: 14vw;
+}
