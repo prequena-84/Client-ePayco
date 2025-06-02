@@ -11,9 +11,6 @@ import BtnLine from "../../components/botton/btn-line";
 import Input from "../../components/input/input";
 import SelectTipoTransaccion from "../../components/select/select-tipo";
 
-import ValidarTransaccion from "../validar-transaccion/validar-token";
-
-
 // Importacion de Estilos
 import stylesForm from "../../css/module/login/login-registro.module.css";
 
@@ -29,13 +26,12 @@ const uriAgregaTransaccion = import.meta.env.VITE_API_REGISTRO_TRANSACCIONES;
 
 const FormRegistroTransaccion: React.FC<Iform> = () => {
 
-    const [ confirmacion, setConfirmacion ] = useState<boolean>(false);
-
     const [ datoTransaccion, setDatoTransaccion ] = useState<ITransaccion>({
         usuario_doc:'',
-        tipo : 'recarga',
-        monto : 0,
-        status : 'pendiente',
+        tipo: 'recarga',
+        monto: 0,
+        status: 'pendiente',
+        celular:'',
     });
 
     const handlerChangeTipo = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,7 +40,8 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
 
         setDatoTransaccion(prevData => ({
             ...prevData,
-            [name]:value as 'recarga' | 'pago',
+            [name]:value,
+            status: value === 'recarga' ? 'confirmada' : 'pendiente',
         }));
     };
 
@@ -107,6 +104,13 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                 <Fieldset className={stylesForm.containerFieldset}>
                     <Legend key="titulo" text="Registro de Transaccion"/>
                     <Div key="usuario_doc">
+                    <Div key="tipo">
+                        <SelectTipoTransaccion
+                            name="tipo"
+                            value={datoTransaccion.tipo}
+                            onChange={(e) => handlerChangeTipo(e)}
+                        />
+                    </Div>
                         <Input
                             key="usuario_doc"
                             name="usuario_doc"
@@ -119,14 +123,23 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                             classInput={stylesForm.inputUserName}
                         />
                     </Div>
-                    <Div key="tipo">
-                        <SelectTipoTransaccion
-                            name="tipo"
-                            value={datoTransaccion.tipo}
-                            onChange={handlerChangeTipo}
-                        />
-                    </Div>
+                    {datoTransaccion.tipo === "recarga" && 
+                        <Div key="celular">
+                            <Input
+                                key="celular"
+                                name="celular"
+                                id="celular"
+                                type="text"
+                                placeHolder="Celular"
+                                arialLabel="celular"
+                                value={datoTransaccion.celular}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesForm.containerInputUserName}
+                                classInput={stylesForm.inputUserName}
+                            />
+                        </Div>}
                     <Div key="monto">
+                        <label>Monto</label>
                         <Input
                             key="monto"
                             name="monto"
@@ -140,20 +153,22 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                             classInput={stylesForm.inputUserName}
                         />
                     </Div>
-                    <Div key="status">
-                        <Input
-                            key="status"
-                            name="status"
-                            id="status"
-                            placeHolder="Estado"
-                            arialLabel="status Disabled input example"
-                            value={datoTransaccion.status}
-                            onChange={ (e) => handleChange(e) }
-                            className={stylesForm.containerInputUserName}
-                            classInput={stylesForm.inputUserName}
-                            disabled={true}
-                        />
-                    </Div>
+                    {datoTransaccion.tipo !== "recarga" &&
+                        <Div key="status">
+                            <label>Estado del Pago</label>
+                            <Input
+                                key="status"
+                                name="status"
+                                id="status"
+                                placeHolder="Estado"
+                                arialLabel="status Disabled input example"
+                                value={datoTransaccion.status}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesForm.containerInputUserName}
+                                classInput={stylesForm.inputUserName}
+                                disabled={true}
+                            />
+                            </Div>}
                     <Div key="btn" className={stylesForm["container-btn-login"]}>
                         <BtnOutLine 
                             key="registrar"
@@ -172,9 +187,6 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                     </Div>
                 </Fieldset>
             </Form>
-            {confirmacion && (
-                <ValidarTransaccion />
-            )}
         </>
     );
 };

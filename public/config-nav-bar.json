@@ -21,8 +21,17 @@
         "menu": "Transacciones",
         "submenu":[
             {
-                "label": "Registro",
+                "label": "Nueva Transacción",
                 "link": "/registro-transaccion"
+            }
+        ]
+    },
+        {
+        "menu": "Confirmación",
+        "submenu":[
+            {
+                "label": "Confirmar Token",
+                "link": "/confirmacion-transaccion"
             }
         ]
     }

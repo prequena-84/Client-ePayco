@@ -1,7 +1,0 @@
-.aside {
-    transition: transform 1s ease; /* Transición suave para la rotación */
-}
-
-.rotate-left {
-    transform: rotateY(-15deg); /* Rotación hacia la izquierda */
-}

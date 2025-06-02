@@ -5,7 +5,8 @@ interface ITransaccion {
     monto : number;
     status : 'pendiente' | 'confirmada';
     token_confirmacion?: string | null;
-    session_id?: string | null
+    session_id?: string | null;
+    celular?: string | undefined;
 }
 
 export type {

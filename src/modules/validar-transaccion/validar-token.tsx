@@ -14,8 +14,6 @@ import BtnLine from "../../components/botton/btn-line";
 
 const ValidarTransaccion = () => {
 
-    // Agregar el Api context
-
     //agregar la opcin para manejar el envio a la API
     const handleChange = () => {
     };
@@ -29,7 +27,21 @@ const ValidarTransaccion = () => {
     return (
         <Form key="formulario-token" onSubmit={handleSubmit} className={`${stylesForm["container-Form"]} main-content`}>
             <Fieldset className={stylesForm.containerFieldset}>
-                <Legend key="titulo" text="Validacion de Token"/>
+                <Legend key="titulo" text="Confirmación de Pago"/>
+                <Div key="idTransaccion">
+                    <label htmlFor="idTransaccion"> Agregar Id del Pago a Confirmar</label>
+                    <Input
+                        key="idTransaccion"
+                        name="idTransaccion"
+                        id="idTransaccion"
+                        placeHolder="Id Transacción"
+                        arialLabel="enviarToken"
+                        value={''/*datoTransaccion.usuario_doc*/}
+                        onChange={ () => handleChange() }
+                        className={stylesForm.containerInputUserName}
+                        classInput={stylesForm.inputUserName}
+                    />
+                </Div>
                 <Div key="enviarToken">
                     <Input
                         key="enviarToken"
@@ -66,3 +78,9 @@ const ValidarTransaccion = () => {
 };
 
 export default ValidarTransaccion;
+
+
+/**
+ * OJO QUEDE EN EL MODULE DEL FRONT EN CREAR LA PETICIONES DE TOKEN Y Y SU REENVIO A LA API SI SE VENCE, EN EL BACK CREAR LA VALIDACIONEN LA API 2 QUE CONECTA AL SERVICIO DE REGISTRO DE TRANSACCIONES LO DEL CELULAR OPARA LA RECARGA O EL TOKEN DEL PAGO Y TERMINO EL PROYECTO
+ * SOLOQUE DOCUMENTACION Y GRABAR EL VIDEO
+ */

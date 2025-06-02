@@ -14,8 +14,8 @@ const SelectTipoTransaccion: React.FC<Iselect> = ( {name=undefined,key=undefined
         value={value}
         onChange={onChange}
       >
-        <option value="0">recarga</option>
-        <option value="1">pago</option>
+        <option value="recarga" >recarga</option>
+        <option value="pago" >pago</option>
       </select>
     );
 };
