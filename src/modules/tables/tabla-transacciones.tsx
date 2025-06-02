@@ -1,11 +1,9 @@
 import React from "react";
-
 import H1 from "../../components/title/h1";
-
 
 import type { tablaTransaccion } from "../../interface/reporte/IReporte-transaccion";
 
-const TableUsers: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
+const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
 
     const data = dataTransaccion.map( items => {
         return {
@@ -55,10 +53,10 @@ const TableUsers: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
                     </tbody>
                 </table>
             ) : (
-                <H1 text="No hay Transacciones Registradas"/>
+                <H1 text="No Hay Transacciones Registradas"/>
             )}
         </>
     );
 };
 
-export default TableUsers;
+export default TablaTransacciones;

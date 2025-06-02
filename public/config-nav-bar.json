@@ -14,6 +14,10 @@
             {
                 "label": "Registro",
                 "link": "/registro-usuario"
+            },
+            {
+                "label": "Consulta",
+                "link": "/consulta-usuario"
             }
         ]
     },

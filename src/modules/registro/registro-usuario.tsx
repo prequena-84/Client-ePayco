@@ -57,8 +57,6 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
             const response = await axios.post(uriAgregarUsuatio, {
                 datoUsuario
             });
-
-            console.log(response)
             alert( response.data.message );
             clearForm();
 

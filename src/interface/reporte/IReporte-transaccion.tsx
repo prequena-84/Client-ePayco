@@ -27,8 +27,13 @@ interface tablaTransaccion {
     dataTransaccion: IReporteTransaccion[];
 }
 
+interface tablaUsuarios {
+    datosUsuario: IUsuarioReporte[];
+}
+
 export type {
     IUsuarioReporte,
+    tablaUsuarios,
     IReporteTransaccion,
     tablaTransaccion,
 }

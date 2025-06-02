@@ -2,32 +2,29 @@
 import _React, { useEffect, useState } from "react";
 
 // Importación de modulos y componentes
-import Section from "../../components/contenedores/section";
-import H1 from "../../components/title/h1";
-import TablaTransacciones from "../tables/tabla-transacciones";
+import Section from "../../components/contenedores/section" ;//"../../components/contenedores/section";
+import H1 from "../../components/title/h1"; //"../../components/title/h1";
+import TablaUsuarios from "../tables/tabla-usuarios"; //"../tables/tabla-transacciones";
 
 // Importación de interfaces
-import type { IReporteTransaccion } from "../../interface/reporte/IReporte-transaccion";
-
-// Importacion del Provider la Api context
+import type { IUsuarioReporte } from "../../interface/reporte/IReporte-transaccion";
 
 // Importación de Axios
 import axios, { type AxiosResponse } from "axios";
 
 //Importacion de URI API
-const uriTransacciones = import.meta.env.VITE_API_REPORTE_TRANSACCIONES;
+const uriConsultaUsuario = import.meta.env.VITE_API_CONSULTA_USUARIO;
 
-const Inicio = () => {
-
+const RegistroUsuarios = () => {
     // Estado del reporte de Transacciones
-    const [ reporte, setReporte ] = useState<IReporteTransaccion[]>([]);
+    const [ reporte, setReporte ] = useState<IUsuarioReporte[]>([]);
     
     useEffect(() => {
         const actualizarDatos = async () => {
             try {
-                const Transaccion: AxiosResponse<{ data: IReporteTransaccion[] }>  = await axios.get(uriTransacciones);
-                setReporte(Transaccion.data.data)
 
+                const datosUsuario: AxiosResponse<{ data: IUsuarioReporte[] }>  = await axios.get(uriConsultaUsuario);
+                setReporte(datosUsuario.data.data)
             } catch(err: unknown) {
 
                 if (axios.isAxiosError(err)) {
@@ -47,11 +44,11 @@ const Inicio = () => {
     return (
         <>
             <Section className="main-content">
-                <H1 text="Historial de Transacciones"/>
-                <TablaTransacciones dataTransaccion={reporte}/>
+                <H1 text="Registro de Usuarios"/>
+                <TablaUsuarios datosUsuario={reporte}/>
             </Section>  
         </>    
     );
 };
 
-export default Inicio;
+export default RegistroUsuarios;
