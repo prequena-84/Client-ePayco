@@ -12,7 +12,7 @@ import type { IReporteTransaccion } from "../../interface/reporte/IReporte-trans
 // Importacion del Provider la Api context
 
 // Importación de Axios
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 
 //Importacion de URI API
 const uriTransacciones = import.meta.env.VITE_API_REPORTE_TRANSACCIONES;
@@ -20,19 +20,13 @@ const uriTransacciones = import.meta.env.VITE_API_REPORTE_TRANSACCIONES;
 const Inicio = () => {
 
     // Estado del reporte de Transacciones
-    const [ reporte, setReporte ] = useState([]);
+    const [ reporte, setReporte ] = useState<IReporteTransaccion[]>([]);
     
     useEffect(() => {
         const actualizarDatos = async () => {
             try {
-                const respTransaccion: IReporteTransaccion[] = await axios.get(uriTransacciones);
-                
-                //console.log(respTransaccion.data.data[0])
-                //console.log(respTransaccion.data.data[0].Usuario.nombre)
-
-                // queda pendiente definir la estructura de la interface del reporte
-
-                setReporte(respTransaccion.data.data)
+                const Transaccion: AxiosResponse<{ data: IReporteTransaccion[] }>  = await axios.get(uriTransacciones);
+                setReporte(Transaccion.data.data)
 
             } catch(err: unknown) {
 
@@ -61,29 +55,3 @@ const Inicio = () => {
 };
 
 export default Inicio;
-
-/*
-    // estructura del objecto del reporte
-
-    {
-        "_id": "683c976d5850d114dc5ff71a",
-        "usuario_doc": "V17477617",
-        "tipo": "recarga",
-        "monto": 350,
-        "status": "pendiente",
-        "token_confirmacion": "",
-        "session_id": "",
-        "id": "f201eb889894a933cd70",
-        "__v": 0,
-        "Usuario": {
-            "_id": "683c96dc5850d114dc5ff714",
-            "documento": "V17477617",
-            "nombre": "Pedro Requena",
-            "email": "pedrorequenarondon@hotmail.com",
-            "celular": "04241772059",
-            "saldo": 0,
-            "__v": 0
-        }
-    }
-
-*/
