@@ -26,44 +26,36 @@ const TableUsers: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
                 <table className="table">
                     <thead>
                         <tr>
-                            {data.length > 0 ? (
-                                title.map( (titulo,index) => (<th key={`title-${index}`} scope="col">{titulo}</th>))
-                            ) : (
-                                <H1 text="Sin transacciones registradas"/>
-                            )}
+                            {title.map( (titulo,index) => (<th key={`title-${index}`} scope="col">{titulo}</th>))}
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length > 0 ? (
-                            data.map( (item,index) => (
-                                <tr key={`row-${index}`}>
-                                    <th key={`Documento-${index}`} scope="row">
-                                        {item.Documento}
-                                    </th >
-                                    <td key={`Usuario-${index}`}>
-                                        {item.Documento}
-                                    </td>
-                                    <td key={`idTransaccion-${index}`}>
-                                        {item["Id Transaccion"]}
-                                    </td>
-                                    <td key={`tipoTransaccion-${index}`}>
-                                        {item["Tipo Transaccion"]}
-                                    </td>
-                                    <td key={`Monto-${index}`}>
-                                        {item.Monto}
-                                    </td>
-                                    <td key={`Estado-${index}`}>
-                                        {item.Estado}
-                                    </td>
-                                </tr>
-                            ))       
-                        ) : ( 
-                            <H1 text="Sin usuarios registrados"/>
-                        )}
+                        {data.map( (item,index) => (
+                            <tr key={`row-${index}`}>
+                                <th key={`Documento-${index}`} scope="row">
+                                    {item.Documento}
+                                </th >
+                                <td key={`Usuario-${index}`}>
+                                    {item.Documento}
+                                </td>
+                                <td key={`idTransaccion-${index}`}>
+                                    {item["Id Transaccion"]}
+                                </td>
+                                <td key={`tipoTransaccion-${index}`}>
+                                    {item["Tipo Transaccion"]}
+                                </td>
+                                <td key={`Monto-${index}`}>
+                                    {item.Monto}
+                                </td>
+                                <td key={`Estado-${index}`}>
+                                    {item.Estado}
+                                </td>
+                            </tr>
+                        ))}       
                     </tbody>
                 </table>
             ) : (
-                <H1 text="No hay transacciones registradas"/>
+                <H1 text="No hay Transacciones Registradas"/>
             )}
         </>
     );
