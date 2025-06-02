@@ -3,20 +3,20 @@ import React from "react";
 import H1 from "../../components/title/h1";
 
 
-import type { IUsuarioReporte,IReporteTransaccion,tablaTransaccion } from "../../interface/reporte/IReporte-transaccion";
+import type { tablaTransaccion } from "../../interface/reporte/IReporte-transaccion";
 
 const TableUsers: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
 
-        const data = dataTransaccion.map( items => {
-           return {
-                Documento:items.usuario_doc,
-                Usuario:items.Usuario.nombre,
-                "Id Transaccion":items.id,
-                "Tipo Transaccion":items.tipo,
-                Monto:items.monto,
-                Estado:items.status,
-           }
-        });
+    const data = dataTransaccion.map( items => {
+        return {
+            Documento:items.usuario_doc,
+            Usuario:items.Usuario.nombre,
+            "Id Transaccion":items.id,
+            "Tipo Transaccion":items.tipo,
+            Monto:items.monto,
+            Estado:items.status,
+        }
+    });
 
    const title = data.map( item => Object.keys(item) )[0];
 
