@@ -9,7 +9,8 @@ import TablaTransacciones from "../tables/tabla-transacciones";
 // Importación de interfaces
 import type { IReporteTransaccion } from "../../interface/reporte/IReporte-transaccion";
 
-// Importacion del Provider la Api context
+// Importacion del spinner para la espera
+import Loading from "../../components/spinners/spinners";
 
 // Importación de Axios
 import axios, { type AxiosResponse } from "axios";
@@ -18,18 +19,18 @@ import axios, { type AxiosResponse } from "axios";
 const uriTransacciones = import.meta.env.VITE_API_REPORTE_TRANSACCIONES;
 
 const Inicio = () => {
-
-    // Estado del reporte de Transacciones
     const [ reporte, setReporte ] = useState<IReporteTransaccion[]>([]);
+    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(true);
     
     useEffect(() => {
         const actualizarDatos = async () => {
             try {
                 const Transaccion: AxiosResponse<{ data: IReporteTransaccion[] }>  = await axios.get(uriTransacciones);
                 setReporte(Transaccion.data.data)
+                setCargandoInfo(false)
 
             } catch(err: unknown) {
-
+                setCargandoInfo(false)
                 if (axios.isAxiosError(err)) {
                     if (err.response) {
                         console.error('error', err.response.data.message);
@@ -41,6 +42,7 @@ const Inicio = () => {
                 };
             };
         };
+        
         actualizarDatos();
     }, [])
 
@@ -48,7 +50,12 @@ const Inicio = () => {
         <>
             <Section className="main-content">
                 <H1 text="Historial de Transacciones"/>
-                <TablaTransacciones dataTransaccion={reporte}/>
+                {cargadoInfo ? (
+                    <Loading />
+                ) : (
+                    <TablaTransacciones dataTransaccion={reporte}/>
+                   
+                )}
             </Section>  
         </>    
     );

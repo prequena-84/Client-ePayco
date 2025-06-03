@@ -1,5 +1,8 @@
 // Importacion de hooks y componentes de React
-import _React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+// Importación de Axios
+import axios, { type AxiosResponse } from "axios";
 
 // Importación de modulos y componentes
 import Section from "../../components/contenedores/section" ;//"../../components/contenedores/section";
@@ -9,8 +12,8 @@ import TablaUsuarios from "../tables/tabla-usuarios"; //"../tables/tabla-transac
 // Importación de interfaces
 import type { IUsuarioReporte } from "../../interface/reporte/IReporte-transaccion";
 
-// Importación de Axios
-import axios, { type AxiosResponse } from "axios";
+// Importacion del spinner para la espera
+import Loading from "../../components/spinners/spinners";
 
 //Importacion de URI API
 const uriConsultaUsuario = import.meta.env.VITE_API_CONSULTA_USUARIO;
@@ -18,15 +21,18 @@ const uriConsultaUsuario = import.meta.env.VITE_API_CONSULTA_USUARIO;
 const RegistroUsuarios = () => {
     // Estado del reporte de Transacciones
     const [ reporte, setReporte ] = useState<IUsuarioReporte[]>([]);
+    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(true);
     
     useEffect(() => {
         const actualizarDatos = async () => {
             try {
 
                 const datosUsuario: AxiosResponse<{ data: IUsuarioReporte[] }>  = await axios.get(uriConsultaUsuario);
-                setReporte(datosUsuario.data.data)
+                setReporte(datosUsuario.data.data)  
+                setCargandoInfo(false)
+                              
             } catch(err: unknown) {
-
+                setCargandoInfo(false)
                 if (axios.isAxiosError(err)) {
                     if (err.response) {
                         console.error('error', err.response.data.message);
@@ -38,6 +44,7 @@ const RegistroUsuarios = () => {
                 };
             };
         };
+        setCargandoInfo(true);
         actualizarDatos();
     }, [])
 
@@ -45,7 +52,11 @@ const RegistroUsuarios = () => {
         <>
             <Section className="main-content">
                 <H1 text="Registro de Usuarios"/>
-                <TablaUsuarios datosUsuario={reporte}/>
+                {cargadoInfo ? (
+                    <Loading />
+                ) : (
+                    <TablaUsuarios datosUsuario={reporte}/>  
+                )}
             </Section>  
         </>    
     );

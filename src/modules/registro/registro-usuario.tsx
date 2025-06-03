@@ -1,5 +1,7 @@
 // Importacion de react
 import React, { useState } from "react";
+// Importacion de hook axios para hacer peticiones al servidor
+import axios from "axios";
 
 // Importacion Componentes
 import Form from "../../components/form/form";
@@ -17,13 +19,15 @@ import stylesFormLogin from "../../css/module/login/login-registro.module.css";
 import type { Iform } from "../../interface/IForms/IForms";
 import type { IUser } from "../../interface/IRegistro-usuario";
 
-// Importacion de hook axios para hacer peticiones al servidor
-import axios from "axios";
+// Importacion del spinner para la espera
+import Loading from "../../components/spinners/spinners";
 
 //Importacion de URI API
 const uriAgregarUsuatio = import.meta.env.VITE_API_REGISTRO_USUARIO;
 
 const FormRegistroUsuario: React.FC<Iform> = () => {
+
+    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(false);
 
     const [ datoUsuario, setDatoUsuario ] = useState<IUser>({
         documento:'',
@@ -52,15 +56,19 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
     
     const handleSubmit = async ( e: React.FormEvent ) => {
         e.preventDefault();  
+        setCargandoInfo(true)
 
         try {
             const response = await axios.post(uriAgregarUsuatio, {
                 datoUsuario
             });
+
+            setCargandoInfo(false);
             alert( response.data.message );
             clearForm();
 
         } catch( err) {
+            setCargandoInfo(false)
             if (axios.isAxiosError(err)) {
                 // Si el error es un error de Axios
                 if (err.response) {
@@ -86,75 +94,81 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
         <Form key="formulario-login" onSubmit={handleSubmit} className={`${stylesFormLogin["container-Form"]} main-content`}>
             <Fieldset className={stylesFormLogin.containerFieldset}>
                 <Legend key="titulo" text={"Registro de Usuario"}/>
-                <Div key="documento">
-                    <Input
-                        key="inpdocumentout"
-                        name="documento"
-                        id="documento"
-                        placeHolder="Documento"
-                        arialLabel="documento"
-                        value={datoUsuario.documento}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="nombre">
-                    <Input
-                        key="nombre"
-                        name="nombre"
-                        id="nombre"
-                        placeHolder="Nombre"
-                        arialLabel="nombre"
-                        value={datoUsuario.nombre}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="email">
-                    <Input
-                        key="email"
-                        name="email"
-                        id="email"
-                        type="email"
-                        placeHolder="Correo"
-                        arialLabel="email"
-                        value={datoUsuario.email}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="celular">
-                    <Input
-                        key="celular"
-                        name="celular"
-                        id="celular"
-                        placeHolder="Celular"
-                        arialLabel="celular"
-                        value={datoUsuario.celular}
-                        onChange={ (e) => handleChange(e) }
-                        className={stylesFormLogin.containerInputUserName}
-                        classInput={stylesFormLogin.inputUserName}
-                    />
-                </Div>
-                <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
-                    <BtnOutLine 
-                        key="ingresar"
-                        text={"Registrar"}
-                        type={"submit"}
-                        sizes={"btn-lg"}
-                        className={stylesFormLogin.btnIngresar}
-                    />
-                    <BtnLine key="limpiar"
-                        type={"button"}
-                        text="Limpiar"
-                        sizes={"btn-lg"}
-                        onClick={clearForm}
-                        className={stylesFormLogin.btnLimpiar}
-                    />
-                </Div>
+                {cargadoInfo ? ( 
+                    <Loading />
+                ) : (
+                    <>
+                        <Div key="documento">
+                            <Input
+                                key="inpdocumentout"
+                                name="documento"
+                                id="documento"
+                                placeHolder="Documento"
+                                arialLabel="documento"
+                                value={datoUsuario.documento}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesFormLogin.containerInputUserName}
+                                classInput={stylesFormLogin.inputUserName}
+                            />
+                        </Div>
+                        <Div key="nombre">
+                            <Input
+                                key="nombre"
+                                name="nombre"
+                                id="nombre"
+                                placeHolder="Nombre"
+                                arialLabel="nombre"
+                                value={datoUsuario.nombre}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesFormLogin.containerInputUserName}
+                                classInput={stylesFormLogin.inputUserName}
+                            />
+                        </Div>
+                        <Div key="email">
+                            <Input
+                                key="email"
+                                name="email"
+                                id="email"
+                                type="email"
+                                placeHolder="Correo"
+                                arialLabel="email"
+                                value={datoUsuario.email}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesFormLogin.containerInputUserName}
+                                classInput={stylesFormLogin.inputUserName}
+                            />
+                        </Div>
+                        <Div key="celular">
+                            <Input
+                                key="celular"
+                                name="celular"
+                                id="celular"
+                                placeHolder="Celular"
+                                arialLabel="celular"
+                                value={datoUsuario.celular}
+                                onChange={ (e) => handleChange(e) }
+                                className={stylesFormLogin.containerInputUserName}
+                                classInput={stylesFormLogin.inputUserName}
+                            />
+                        </Div>
+                        <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
+                            <BtnOutLine 
+                                key="ingresar"
+                                text={"Registrar"}
+                                type={"submit"}
+                                sizes={"btn-lg"}
+                                className={stylesFormLogin.btnIngresar}
+                            />
+                            <BtnLine key="limpiar"
+                                type={"button"}
+                                text="Limpiar"
+                                sizes={"btn-lg"}
+                                onClick={clearForm}
+                                className={stylesFormLogin.btnLimpiar}
+                            />
+                        </Div>
+                    </>
+                )}
             </Fieldset>
         </Form>
     );
