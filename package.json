@@ -13,14 +13,12 @@
     "bootstrap": "^5.3.6",
     "client": "^0.0.1",
     "client-epayco": "file:",
-    "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
     "react-spinners": "^0.17.0"
   },
   "devDependencies": {
-    "@types/jwt-decode": "^2.2.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-router-dom": "^5.3.3",
