@@ -5,7 +5,7 @@ import type { tablaTransaccion } from "../../interface/reporte/IReporte-transacc
 
 const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
 
-    const data = dataTransaccion.map( items => {
+    const data = dataTransaccion?.map( items => {
         return {
             Documento:items.usuario_doc,
             Usuario:items.Usuario.nombre,
@@ -16,7 +16,7 @@ const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => 
         }
     });
 
-   const title = data.map( item => Object.keys(item) )[0];
+   const title = data?.map( item => Object.keys(item) )[0];
 
     return (
         <>
@@ -43,7 +43,7 @@ const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => 
                                     {item["Tipo Transaccion"]}
                                 </td>
                                 <td key={`Monto-${index}`}>
-                                    {item.Monto}
+                                    {item.Monto.toFixed(2)}
                                 </td>
                                 <td key={`Estado-${index}`}>
                                     {item.Estado}

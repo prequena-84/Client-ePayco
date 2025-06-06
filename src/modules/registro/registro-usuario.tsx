@@ -56,38 +56,49 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
     
     const handleSubmit = async ( e: React.FormEvent ) => {
         e.preventDefault();  
-        setCargandoInfo(true)
+        setCargandoInfo(true);
 
-        try {
-            const response = await axios.post(uriAgregarUsuatio, {
-                datoUsuario
-            });
+        if ( datoUsuario.documento !== '' &&
+            datoUsuario.nombre !== '' &&
+            datoUsuario.email !== '' &&
+            datoUsuario.celular !== '' ) {
 
-            setCargandoInfo(false);
-            alert( response.data.message );
-            clearForm();
+            try {
+                const response = await axios.post(uriAgregarUsuatio, {
+                    datoUsuario
+                });
 
-        } catch( err) {
-            setCargandoInfo(false)
-            if (axios.isAxiosError(err)) {
-                // Si el error es un error de Axios
-                if (err.response) {
-                    // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
-                    console.error('Error de respuesta:', err.response.data);
-                    console.error('Código de estado:', err.response.status);
+                setCargandoInfo(false);
+                alert( response.data.message );
+                clearForm();
 
-                } else if (err.request) {
-                    // La solicitud se realizó pero no se recibió respuesta
-                    console.error('Error de solicitud:', err.request);
+            } catch( err) {
+                setCargandoInfo(false)
+                if (axios.isAxiosError(err)) {
+                    // Si el error es un error de Axios
+                    if (err.response) {
+                        // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
+                        console.error('Error de respuesta:', err.response.data);
+                        console.error('Código de estado:', err.response.status);
+
+                    } else if (err.request) {
+                        // La solicitud se realizó pero no se recibió respuesta
+                        console.error('Error de solicitud:', err.request);
+                    } else {
+                        // Algo sucedió al configurar la solicitud que lanzó un error
+                        console.error('Error:', err.message);
+                    }
                 } else {
-                    // Algo sucedió al configurar la solicitud que lanzó un error
-                    console.error('Error:', err.message);
-                }
-            } else {
-                // Manejar otros tipos de errores
-                console.error('Error no relacionado con Axios:', err);
+                    // Manejar otros tipos de errores
+                    console.error('Error no relacionado con Axios:', err);
+                };
             };
-        };
+
+            } else {
+                alert('Por favor ingrese todos los datos del "Usuario" para completar el registro')
+                setCargandoInfo(false);
+            }
+
     };
 
     return (

@@ -1,7 +1,7 @@
 interface IToken {
     token: string;
     documento?:string;
-    idTransaccion?: string;
+    id?: string;
 }
 
 export type {

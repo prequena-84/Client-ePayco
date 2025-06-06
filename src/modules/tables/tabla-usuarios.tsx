@@ -5,7 +5,7 @@ import type { tablaUsuarios } from "../../interface/reporte/IReporte-transaccion
 
 const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
 
-    const data = datosUsuario.map( items => {
+    const data = datosUsuario?.map( items => {
         return {
             Documento:items.documento,
             Nombre:items.nombre,
@@ -15,7 +15,7 @@ const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
         }
     });
 
-   const title = data.map( item => Object.keys(item) )[0];
+   const title = data?.map( item => Object.keys(item) )[0] || [];
 
     return (
         <>
@@ -42,7 +42,7 @@ const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
                                     {item.Celular}
                                 </td>
                                 <td key={`Saldo-${index}`}>
-                                    {item.Saldo}
+                                    {item.Saldo.toFixed(2)}
                                 </td>
                             </tr>
                         ))}       

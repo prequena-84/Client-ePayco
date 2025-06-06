@@ -1,6 +1,6 @@
 //import React from "react";
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { isAxiosError} from "axios";
 
 import Form from "../../components/form/form";
 import Input from "../../components/input/input";
@@ -31,7 +31,7 @@ const ValidarTransaccion: React.FC<Iform> = () => {
     const [ data, setData ] = useState<IToken>({
         token:'',
         documento:'',
-        idTransaccion:'',  
+        id:'',  
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +43,12 @@ const ValidarTransaccion: React.FC<Iform> = () => {
         }));
     };
 
+    // esta sin usar
     const clearForm = () => {
         setData({
             token:'',
             documento:'',
-            idTransaccion:'',
+            id:'',
         });
     };
 
@@ -55,44 +56,69 @@ const ValidarTransaccion: React.FC<Iform> = () => {
         e.preventDefault(); 
         setCargandoInfo(true);
 
-        const body = {
-            documento:data.documento,
-            idTransaccion:data.idTransaccion
-        }
+        if ( data.documento !== '' && data.id !== '' && data.token !== '' ) {
 
-        try {
-            const responseConfirmacion = await axios.post(uriConfirmarTransaccion, body, {
-                headers: {
-                    Authorization: `Bearer ${data.token}`,
-                },
-            })
+            const body = {
+                documento:data.documento,
+                id:data.id
+            }
 
-            setCargandoInfo(false)
-            alert(responseConfirmacion.data.message)
-            clearForm();
-        } catch(err: unknown) {
+            try {
+                const responseConfirmacion = await axios.post(uriConfirmarTransaccion, body, {
+                    headers: {
+                        Authorization: `Bearer ${data.token}`,
+                    },
+                })
+
+                setCargandoInfo(false)
+                alert(responseConfirmacion.data.message)
+                clearForm();
+
+            } catch(err) {
+                setCargandoInfo(false);
+
+                if (isAxiosError(err)) {
+
+                    if (err.response) {
+                        alert(err.response.data.message)
+                        console.error('mensaje', err.response.data.message);
+                    } else {
+                        console.error('Error de solicitud:', err.request);
+                    };
+                } else {
+                    console.error('Error no relacionado con Axios:', err);
+                };
+            };
+        } else {
+            alert('Ingrese los datos del Documento, Id de la Transacción y Token para enviar la autorización de la transacción')
             setCargandoInfo(false);
-            alert('Por favor ingresar el Documento, Id de Transacción o Token valido')
-        };
+        }
     };
 
     const solicitarToken = async () => {
         try {
             setCargandoInfo(true);
 
-            const body = {
-                documento:data.documento,
-                idTransaccion:data.idTransaccion
-            }
-            
-            const responseToken = await axios.post(uriSolitudToken, body)
-            setCargandoInfo(false);
-            alert(responseToken.data.data)
+            if ( data.documento !== '' && data.id !== '' ) {
 
-        } catch( err) {
+                const body = {
+                    documento:data.documento,
+                    id:data.id
+                };           
+                
+                const responseToken = await axios.post(uriSolitudToken, body);
+                setCargandoInfo(false);
+                alert(responseToken.data.data)
+
+            } else {
+                alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
+                setCargandoInfo(false);
+            };
+
+        } catch( err: any  ) {
             setCargandoInfo(false);
-            alert(`ocurrio un error con la solicitud del token, por favor intentarlo de nuevo en 1 minutos `)
-            console.error('error en solitud', err)
+            console.error(err)
+            alert(err.response.data.message)
         }
     };
 
@@ -117,15 +143,15 @@ const ValidarTransaccion: React.FC<Iform> = () => {
                                 classInput={stylesForm.inputUserName}
                             />
                         </Div>
-                        <Div key="idTransaccion">
-                            <label htmlFor="idTransaccion"> Agregar Id del Pago a Confirmar</label>
+                        <Div key="id">
+                            <label htmlFor="id"> Agregar Id del Pago a Confirmar</label>
                             <Input
-                                key="idTransaccion"
-                                name="idTransaccion"
-                                id="idTransaccion"
+                                key="id"
+                                name="id"
+                                id="id"
                                 placeHolder="Id Transacción"
-                                arialLabel="enviarToken"
-                                value={data.idTransaccion}
+                                arialLabel="id"
+                                value={data.id}
                                 onChange={ (e) => handleChange(e) }
                                 className={stylesForm.containerInputUserName}
                                 classInput={stylesForm.inputUserName}
