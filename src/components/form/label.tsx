@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { Ilabel } from "../../interface/IForms/Ilabel";
+import type { Ilabel } from "../../typescript/interface/forms/Ilabel";
 
 const Label: React.FC<Ilabel> = ( {text, className = undefined, htmlFor=undefined} ) => {
     return (

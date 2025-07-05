@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { Ifieldset } from "../../interface/IForms/IFieldset";
+import type { Ifieldset } from "../../typescript/interface/forms/fieldset.interfaces";
 
 const Fieldset:React.FC<Ifieldset> = ( {children, className = undefined} ) => {
     return (

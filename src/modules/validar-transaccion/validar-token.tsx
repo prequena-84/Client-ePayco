@@ -13,8 +13,8 @@ import BtnLine from "../../components/botton/btn-line";
 // Importacion de Estilos
 import stylesForm from "../../css/module/login/login-registro.module.css";
 
-import type { Iform } from "../../interface/IForms/IForms";
-import type { IToken } from "../../interface/token/IToken";
+import type { Iform } from "../../typescript/interface/forms/form.interfaces";
+import type { IToken } from "../../typescript/interface/token/token.interfaces";
 
 
 // Importacion del spinner para la espera

@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { IAside } from "../../interface/IContenedores/Iaside"; //IAside";
+import type { IAside } from "../../typescript/interface/container/aside.interfaces"; //IAside";
 
 const Aside: React.FC<IAside> = ({
     keyAside = undefined,

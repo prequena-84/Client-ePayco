@@ -16,8 +16,8 @@ import Input from "../../components/input/input";
 import stylesFormLogin from "../../css/module/login/login-registro.module.css";
 
 // Importacion de interfaces
-import type { Iform } from "../../interface/IForms/IForms";
-import type { IUser } from "../../interface/IRegistro-usuario";
+import type { Iform } from "../../typescript/interface/forms/form.interfaces";
+import type { IUser } from "../../typescript/interface/users/users.interfaces";
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";

@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { Ilegend } from "../../interface/IForms/ILegend";
+import type { Ilegend } from "../../typescript/interface/forms/legend.interfaces";
 
 const Legend: React.FC<Ilegend> = ( {text, className=undefined} ) => {
     

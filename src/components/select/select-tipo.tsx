@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { Iselect } from "../../interface/ISelect/ISelect";
+import type { Iselect } from "../../typescript/interface/select/select.interfaces";
 
 const SelectTipoTransaccion: React.FC<Iselect> = ( {name=undefined,key=undefined, className = undefined, value, onChange} ) => {
     return (

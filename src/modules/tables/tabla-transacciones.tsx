@@ -1,7 +1,7 @@
 import React from "react";
 import H1 from "../../components/title/h1";
 
-import type { tablaTransaccion } from "../../interface/reporte/IReporte-transaccion";
+import type { tablaTransaccion } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
 
 const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
 

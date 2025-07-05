@@ -18,8 +18,8 @@ import SelectTipoTransaccion from "../../components/select/select-tipo";
 import stylesForm from "../../css/module/login/login-registro.module.css";
 
 // Importacion de interfaces
-import type { Iform } from "../../interface/IForms/IForms";
-import type { ITransaccion } from "../../interface/IRegistro-transaccion";
+import type { Iform } from "../../typescript/interface/forms/form.interfaces";
+import type { ITransaccion } from "../../typescript/interface/transaction/transaction.interfaces";
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";

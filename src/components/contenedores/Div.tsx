@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { IDiv } from "../../interface/IContenedores/Idiv";
+import type { IDiv } from "../../typescript/interface/container/div.interfaces";
 
 const Div: React.FC<IDiv> = ( {children, className = undefined} ) => {
     return(

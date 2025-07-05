@@ -10,7 +10,7 @@ import H1 from "../../components/title/h1"; //"../../components/title/h1";
 import TablaUsuarios from "../tables/tabla-usuarios"; //"../tables/tabla-transacciones";
 
 // Importación de interfaces
-import type { IUsuarioReporte } from "../../interface/reporte/IReporte-transaccion";
+import type { IUsuarioReporte } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Importación de interfaces
-import type { INavBar, Menu } from "../../interface/Inav-bar/INav-bar";
+import type { INavBar, Menu } from "../../typescript/interface/nav-bar/nav-bar.interfaces";
 
 const NavBar: React.FC<INavBar> = ( {titleBrand="Menu", titleNavbar = "Menu"} ) => {
 

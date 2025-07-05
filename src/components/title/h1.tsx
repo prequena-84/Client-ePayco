@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de Interfaces
-import type { IH1 } from "../../interface/Ititle/Ih1";
+import type { IH1 } from "../../typescript/interface/titles/Ih1";
 
 const H1: React.FC<IH1> = ( {text="", className = undefined} ) => {
     return (

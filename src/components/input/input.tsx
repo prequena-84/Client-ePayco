@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { IInputGroupText } from "../../interface/IInput/IInput-group-text";
+import type { IInputGroupText } from "../../typescript/interface/input/input.group.text.interfaces";
 
 const Input:React.FC<IInputGroupText> = ({
     name,

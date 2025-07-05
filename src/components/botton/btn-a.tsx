@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { IBtnA } from "../../interface/Ibtn/IBtnA";
+import type { IBtnA } from "../../typescript/interface/btn/btn.a.interfaces";
 
 const BtnA:React.FC<IBtnA> = ( {
     role=undefined,

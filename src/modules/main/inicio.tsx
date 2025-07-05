@@ -7,7 +7,7 @@ import H1 from "../../components/title/h1";
 import TablaTransacciones from "../tables/tabla-transacciones";
 
 // Importación de interfaces
-import type { IReporteTransaccion } from "../../interface/reporte/IReporte-transaccion";
+import type { IReporteTransaccion } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";

@@ -6,7 +6,7 @@ import Div from "../contenedores/Div";
 import BtnLine from "./btn-line";
 
 // Importación de interfaces
-import type { IBtn } from "../../interface/Ibtn/IBtn";
+import type { IBtn } from "../../typescript/interface/btn/btn.interfaces";
 
 const BtnBlockLine: React.FC<IBtn> = ( {
     type, 

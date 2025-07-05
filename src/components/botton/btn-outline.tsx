@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { IBtn } from "../../interface/Ibtn/IBtn";
+import type { IBtn } from "../../typescript/interface/btn/btn.interfaces";
 
 const BtnOutLine:React.FC<IBtn> = ( {
     type="button",

@@ -2,7 +2,7 @@
 import React from "react";
 
 // Importación de interfaces
-import type { ISection } from "../../interface/IContenedores/Isection";
+import type { ISection } from "../../typescript/interface/container/sections.interfaces";
 
 const Section: React.FC<ISection> = ( {children, className = undefined} ) => {
     return (

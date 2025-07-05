@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // Importación de interfaces
-import type { IInputPassword } from "../../interface/IInput/IPassword";
+import type { IInputPassword } from "../../typescript/interface/input/password.interfaces";
 
 // Importación de css modular
 import styles from "../../css/module/input/input-password.module.css";
