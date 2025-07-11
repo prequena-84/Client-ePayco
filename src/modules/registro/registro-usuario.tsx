@@ -1,7 +1,5 @@
 // Importacion de react
 import React, { useState } from "react";
-// Importacion de hook axios para hacer peticiones al servidor
-import axios from "axios";
 
 // Importacion Componentes
 import Form from "../../components/form/form";
@@ -12,92 +10,74 @@ import BtnOutLine from "../../components/botton/btn-outline";
 import BtnLine from "../../components/botton/btn-line";
 import Input from "../../components/input/input";
 
+import requestFecth from "../../utils/fetch.utils";
+
 // Importacion de Estilos
 import stylesFormLogin from "../../css/module/login/login-registro.module.css";
 
 // Importacion de interfaces
-import type { Iform } from "../../typescript/interface/forms/form.interfaces";
+import type { IForm } from "../../typescript/interface/html/html.interfaces";
 import type { IUser } from "../../typescript/interface/users/users.interfaces";
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";
 
 //Importacion de URI API
-const uriAgregarUsuatio = import.meta.env.VITE_API_REGISTRO_USUARIO;
+//const uriAgregarUsuatio = import.meta.env.VITE_API_ADD_USERS;
 
-const FormRegistroUsuario: React.FC<Iform> = () => {
+const FormAddUsers: React.FC<IForm> = () => {
 
-    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(false);
+    const [ loadingInfo, setLoadingInfo ] = useState<boolean>(false);
 
-    const [ datoUsuario, setDatoUsuario ] = useState<IUser>({
-        documento:'',
-        nombre:'',
+    const [ dataUser, setDataUser ] = useState<IUser>({
+        document:'',
+        name:'',
         email:'',
-        celular:'',
+        phone:'',
     });
 
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
 
-        setDatoUsuario( prevDatoUsuario  => ({
-            ...prevDatoUsuario,
+        setDataUser( (prevDataUser):IUser => ({
+            ...prevDataUser,
             [name]:value
         }));
     };
 
     const clearForm = () => {
-        setDatoUsuario({
-            documento:'',
-            nombre:'',
+        setDataUser({
+            document:'',
+            name:'',
             email:'',
-            celular:'',
+            phone:'',
         });
     };
     
-    const handleSubmit = async ( e: React.FormEvent ) => {
-        e.preventDefault();  
-        setCargandoInfo(true);
+    const handleSubmit = async ( event: React.FormEvent ) => {
+        event.preventDefault();  
+        setLoadingInfo(true);
 
-        if ( datoUsuario.documento !== '' &&
-            datoUsuario.nombre !== '' &&
-            datoUsuario.email !== '' &&
-            datoUsuario.celular !== '' ) {
+        const { document, name, email, phone }: IUser = dataUser;
+
+        if ( document !== '' && name !== '' && email !== '' && phone !== '' ) {
 
             try {
-                const response = await axios.post(uriAgregarUsuatio, {
-                    datoUsuario
-                });
+                const response = await requestFecth<IUser>(import.meta.env.VITE_API_ADD_USERS, "POST", dataUser)
 
-                setCargandoInfo(false);
-                alert( response.data.message );
+                setLoadingInfo(false);
+                alert( response.message );
                 clearForm();
 
             } catch( err) {
-                setCargandoInfo(false)
-                if (axios.isAxiosError(err)) {
-                    // Si el error es un error de Axios
-                    if (err.response) {
-                        // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
-                        console.error('Error de respuesta:', err.response.data);
-                        console.error('Código de estado:', err.response.status);
-
-                    } else if (err.request) {
-                        // La solicitud se realizó pero no se recibió respuesta
-                        console.error('Error de solicitud:', err.request);
-                    } else {
-                        // Algo sucedió al configurar la solicitud que lanzó un error
-                        console.error('Error:', err.message);
-                    }
-                } else {
-                    // Manejar otros tipos de errores
-                    console.error('Error no relacionado con Axios:', err);
-                };
+                setLoadingInfo(false)
+                console.error(`Ha ocurrido el siguiente Error: ${err}`);
             };
+        } else {
 
-            } else {
-                alert('Por favor ingrese todos los datos del "Usuario" para completar el registro')
-                setCargandoInfo(false);
-            }
+            alert('Por favor ingrese todos los datos del "Usuario" para completar el registro')
+            setLoadingInfo(false);
+        };
 
     };
 
@@ -105,7 +85,7 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
         <Form key="formulario-login" onSubmit={handleSubmit} className={`${stylesFormLogin["container-Form"]} main-content`}>
             <Fieldset className={stylesFormLogin.containerFieldset}>
                 <Legend key="titulo" text={"Registro de Usuario"}/>
-                {cargadoInfo ? ( 
+                {loadingInfo ? ( 
                     <Loading />
                 ) : (
                     <>
@@ -116,8 +96,8 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                                 id="documento"
                                 placeHolder="Documento"
                                 arialLabel="documento"
-                                value={datoUsuario.documento}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataUser.document}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
                                 classInput={stylesFormLogin.inputUserName}
                             />
@@ -129,8 +109,8 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                                 id="nombre"
                                 placeHolder="Nombre"
                                 arialLabel="nombre"
-                                value={datoUsuario.nombre}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataUser.name}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
                                 classInput={stylesFormLogin.inputUserName}
                             />
@@ -143,8 +123,8 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                                 type="email"
                                 placeHolder="Correo"
                                 arialLabel="email"
-                                value={datoUsuario.email}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataUser.email}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
                                 classInput={stylesFormLogin.inputUserName}
                             />
@@ -156,8 +136,8 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
                                 id="celular"
                                 placeHolder="Celular"
                                 arialLabel="celular"
-                                value={datoUsuario.celular}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataUser.phone}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
                                 classInput={stylesFormLogin.inputUserName}
                             />
@@ -185,4 +165,4 @@ const FormRegistroUsuario: React.FC<Iform> = () => {
     );
 };
 
-export default FormRegistroUsuario;
+export default FormAddUsers;

@@ -8,7 +8,7 @@ import type { IReportTransaction } from "../../typescript/interface/transaction/
 
 //const uriTransaction = import.meta.env.VITE_API_GET_TRANSACTION;
 
-const Inicio = () => {
+const Home = () => {
     const [ report, setReport ] = useState<IReportTransaction[]> ([]);
     const [ loadingInfo, setLoadingInfo ] = useState<boolean> (true);
     
@@ -42,4 +42,4 @@ const Inicio = () => {
     );
 };
 
-export default Inicio;
+export default Home;

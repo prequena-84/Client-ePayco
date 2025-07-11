@@ -6,7 +6,9 @@
 ## Opción 1: Se debe crear un archivo .env en la ruta de la raiz del proyecto y copiar las rutas de los siquientes Endpoints de API.
 
 ## Endpoint API
-VITE_API_REGISTRO_USUARIO=http://localhost:8040/API/V2/usuario/agregar/
+##OK
+VITE_API_ADD_USERS=http://localhost:8080/UserManagementAPI/V1/user/add
+
 VITE_API_CONSULTA_USUARIO=http://localhost:8040/API/V2/usuario/consulta/
 VITE_API_REGISTRO_TRANSACCIONES=http://localhost:8040/API/V2/transaccion/agregar/
 

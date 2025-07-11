@@ -1,8 +1,10 @@
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 import NavBar from "./components/navbar/navbar-menu";
-import Inicio from "./modules/main/inicio";
-import FormRegistroUsuario from "./modules/registro/registro-usuario";
+
+import Home from "./modules/main/inicio"; // ok
+import FormAddUsers from "./modules/registro/registro-usuario"; // ok
+
 import FormRegistroTransaccion from "./modules/registro/registro-transaccion";
 import ValidarTransaccion from "./modules/validar-transaccion/validar-token";
 import RegistroUsuarios from "./modules/consulta/consulta-usuario";
@@ -13,9 +15,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path="/" element={ <Inicio/> }/>
-        <Route path="add-user" element={ <FormRegistroUsuario/> }/>
-        <Route path="get-usuario" element={ <RegistroUsuarios/> }/>
+        <Route path="/" element={ <Home/> }/> {/*ok*/}
+        <Route path="add-user" element={ <FormAddUsers/> }/>  {/*ok*/}
+        <Route path="get-usuario" element={ <RegistroUsuarios/> }/> {/*Quede en este Modulo*/}
         <Route path="add-transaction" element={ <FormRegistroTransaccion/> }/>
         <Route path="confirmation-transaction" element={ <ValidarTransaccion/> }/>
       </Routes>

@@ -13,7 +13,7 @@
         "submenu":[
             {
                 "label": "Registro",
-                "link": "/registro-usuario"
+                "link": "/add-user"
             },
             {
                 "label": "Consulta",
