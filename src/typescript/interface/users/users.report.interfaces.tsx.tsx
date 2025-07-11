@@ -1,5 +1,5 @@
-import type { IUser } from "../users/users.interfaces";
-import type { T__v, T_id } from "../../types/report/users.report.types";
+import type { IUser } from "./users.interfaces";
+import type { T__v, T_id } from "../../types/mongoose/mongoose.types";
 
 // Usuario anidado dentro de cada transacción
 interface IReportUser extends IUser {

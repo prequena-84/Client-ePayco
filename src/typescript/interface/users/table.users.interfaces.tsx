@@ -1,13 +1,13 @@
 import type { IUser } from "../users/users.interfaces";
 //import type { IReportUser } from "../report/users.report.interfaces.tsx";
-import type { T__V, T_id } from "../../types/tables/table.types";
+import type { T__v,T_id } from "../../types/mongoose/mongoose.types";
 
 interface ITableUsers extends IUser {
-    __v?: T__V | null;
+    __v?: T__v | null;
     _id?: T_id | null;
 }
 
-interface dataUser {
+interface stateUser {
     data: ITableUsers[];
 }
 
@@ -18,5 +18,5 @@ interface dataUser {
 export type {
     ITableUsers,
     //ITableReportUsers,
-    dataUser,
+    stateUser,
 }

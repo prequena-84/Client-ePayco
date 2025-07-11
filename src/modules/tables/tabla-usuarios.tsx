@@ -1,7 +1,7 @@
 import React from "react";
 import H1 from "../../components/title/h1";
 
-import type { tablaUsuarios } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
+import type { tablaUsuarios } from "../../typescript/interface/users/users.report.interfaces.tsx.tsx";
 
 const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
 

@@ -1,19 +1,19 @@
 import React from "react";
 import H1 from "../../components/title/h1";
 
-import type { tablaTransaccion } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
+import type { ITableTransaction } from "../../typescript/interface/html/html.interfaces";
 
-const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => {
+const TablaTransacciones: React.FC<ITableTransaction> = ( {dataTransaction} ) => {
 
-    const data = dataTransaccion?.map( items => {
+    const data = dataTransaction?.map( items => {
         return {
-            Documento:items.usuario_doc,
-            Usuario:items.Usuario.nombre,
+            Documento:items.userDocument,
+            Usuario:items.users.name,
             "Id Transaccion":items.id,
-            "Tipo Transaccion":items.tipo,
-            Monto:items.monto,
+            "Tipo Transaccion":items.type,
+            Monto:items.amount,
             Estado:items.status,
-        }
+        };
     });
 
    const title = data?.map( item => Object.keys(item) )[0];
@@ -24,28 +24,28 @@ const TablaTransacciones: React.FC<tablaTransaccion> = ( {dataTransaccion} ) => 
                 <table className="table">
                     <thead>
                         <tr>
-                            {title.map( (titulo,index) => (<th key={`title-${index}`} scope="col">{titulo}</th>))}
+                            {title.map( (title,index) => (<th key={`title-${index}`} scope="col">{title}</th>))}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map( (item,index) => (
                             <tr key={`row-${index}`}>
-                                <th key={`Documento-${index}`} scope="row">
+                                <th key={`document-${index}`} scope="row">
                                     {item.Documento}
                                 </th >
-                                <td key={`Usuario-${index}`}>
-                                    {item.Documento}
+                                <td key={`users-${index}`}>
+                                    {item.Usuario}
                                 </td>
-                                <td key={`idTransaccion-${index}`}>
+                                <td key={`idTransaction-${index}`}>
                                     {item["Id Transaccion"]}
                                 </td>
-                                <td key={`tipoTransaccion-${index}`}>
+                                <td key={`typeTransaction-${index}`}>
                                     {item["Tipo Transaccion"]}
                                 </td>
-                                <td key={`Monto-${index}`}>
+                                <td key={`amount-${index}`}>
                                     {item.Monto.toFixed(2)}
                                 </td>
-                                <td key={`Estado-${index}`}>
+                                <td key={`state-${index}`}>
                                     {item.Estado}
                                 </td>
                             </tr>

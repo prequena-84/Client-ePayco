@@ -1,7 +1,6 @@
 import type { IUser } from "../users/users.interfaces";
-import type { ITransaction } from "../transaction/transaction.interfaces";
-import type { T__v } from "../../types/report/users.report.types";
-import type { T_id } from "../../types/tables/table.types";
+import type { ITransaction } from "./transaction.interfaces";
+import type { T__v, T_id } from "../../types/mongoose/mongoose.types";
 
 // Transacción con usuario embebido
 interface IReportTransaction extends ITransaction {

@@ -9,7 +9,9 @@
 VITE_API_REGISTRO_USUARIO=http://localhost:8040/API/V2/usuario/agregar/
 VITE_API_CONSULTA_USUARIO=http://localhost:8040/API/V2/usuario/consulta/
 VITE_API_REGISTRO_TRANSACCIONES=http://localhost:8040/API/V2/transaccion/agregar/
-VITE_API_REPORTE_TRANSACCIONES=http://localhost:8040/API/V2/transaccion/consulta/
+
+## ok
+VITE_API_GET_TRANSACTION=http://localhost:8080/UserManagementAPI/V1/transactions/get
 
 VITE_API_CONFIRMAR_TRANSACCION=http://localhost:8040/API/V2/transaccion/confirmar-transaccion/
 

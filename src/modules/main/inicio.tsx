@@ -1,59 +1,41 @@
-// Importacion de hooks y componentes de React
 import _React, { useEffect, useState } from "react";
-
-// Importación de modulos y componentes
 import Section from "../../components/contenedores/section";
 import H1 from "../../components/title/h1";
 import TablaTransacciones from "../tables/tabla-transacciones";
-
-// Importación de interfaces
-import type { IReporteTransaccion } from "../../typescript/interface/report/users.report.interfaces.tsx.tsx";
-
-// Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";
+import requestFecth from "../../utils/fetch.utils.tsx";
+import type { IReportTransaction } from "../../typescript/interface/transaction/transaction.report.interfaces.tsx";
 
-// Importación de Axios
-import axios, { type AxiosResponse, isAxiosError } from "axios";
-
-//Importacion de URI API
-const uriTransacciones = import.meta.env.VITE_API_REPORTE_TRANSACCIONES;
+//const uriTransaction = import.meta.env.VITE_API_GET_TRANSACTION;
 
 const Inicio = () => {
-    const [ reporte, setReporte ] = useState<IReporteTransaccion[]>([]);
-    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(true);
+    const [ report, setReport ] = useState<IReportTransaction[]> ([]);
+    const [ loadingInfo, setLoadingInfo ] = useState<boolean> (true);
     
     useEffect( () => {
-        const actualizarDatos = async () => {
+        const updateDataTransaction = async () => {
             try {
-                const Transaccion: AxiosResponse<{ data: IReporteTransaccion[] }> = await axios.get(uriTransacciones);
-                setReporte(Transaccion.data.data)
-                setCargandoInfo(false)
+                const datatransaction: IReportTransaction[] = await requestFecth<IReportTransaction[]>(import.meta.env.VITE_API_GET_TRANSACTION).then( resp => resp.data);
+                setReport(datatransaction);
+                setLoadingInfo(false);
 
             } catch(err: unknown) {
-                setCargandoInfo(false)
-                if (isAxiosError(err)) {
-                    if (err.response) {
-                        console.error('error', err.response.data.message);
-                    } else {
-                        console.error('Error de solicitud:', err.request);
-                    };
-                } else {
-                    console.error('Error no relacionado con Axios:', err);
-                };
+                setLoadingInfo(false);
+                console.error(`Se ha identificado el siguiente error: ${err}`);
             };
         };
         
-        actualizarDatos();
-    }, [])
+        updateDataTransaction();
+    }, []);
 
     return (
         <>
             <Section className="main-content">
                 <H1 text="Historial de Transacciones"/>
-                {cargadoInfo ? (
+                {loadingInfo ? (
                     <Loading />
                 ) : (
-                    <TablaTransacciones dataTransaccion={reporte}/>
+                    <TablaTransacciones dataTransaction={report}/>
                 )}
             </Section>  
         </>    

@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/typescript/interface/report/users.report.interfaces.tsx.tsx"]
+  "include": ["src", "src/typescript/interface/users/users.report.interfaces.tsx.tsx"]
 }

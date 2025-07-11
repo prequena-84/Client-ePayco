@@ -14,10 +14,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={ <Inicio/> }/>
-        <Route path="registro-usuario" element={ <FormRegistroUsuario/> }/>
-        <Route path="consulta-usuario" element={ <RegistroUsuarios/> }/>
-        <Route path="registro-transaccion" element={ <FormRegistroTransaccion/> }/>
-        <Route path="confirmacion-transaccion" element={ <ValidarTransaccion/> }/>
+        <Route path="add-user" element={ <FormRegistroUsuario/> }/>
+        <Route path="get-usuario" element={ <RegistroUsuarios/> }/>
+        <Route path="add-transaction" element={ <FormRegistroTransaccion/> }/>
+        <Route path="confirmation-transaction" element={ <ValidarTransaccion/> }/>
       </Routes>
     </BrowserRouter>
     </>

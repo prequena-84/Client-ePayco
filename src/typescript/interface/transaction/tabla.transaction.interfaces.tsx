@@ -1,4 +1,4 @@
-import type { IReportTransaction } from "../report/transaction.report.interfaces";
+import type { IReportTransaction } from "./transaction.report.interfaces";
 
 // ITableTransaction
 interface ITableTransaction  {
