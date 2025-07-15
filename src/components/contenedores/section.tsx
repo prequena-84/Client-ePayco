@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { ISection } from "../../typescript/interface/container/sections.interfaces";
+import type { ISection } from "../../typescript/interface/html/html.interfaces";
 
 const Section: React.FC<ISection> = ( {children, className = undefined} ) => {
     return (

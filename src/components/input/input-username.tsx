@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IInputGroupText } from "../../typescript/interface/input/input.group.text.interfaces";
+import type { IInputGroupText } from "../../typescript/interface/html/html.interfaces";
 
 const InputUsername:React.FC<IInputGroupText> = ({
     name,

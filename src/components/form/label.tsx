@@ -1,10 +1,7 @@
-// Importacion de hooks y componentes de React
 import React from "react";
+import type { ILabel } from "../../typescript/interface/html/html.interfaces";
 
-// Importación de interfaces
-import type { Ilabel } from "../../typescript/interface/forms/Ilabel";
-
-const Label: React.FC<Ilabel> = ( {text, className = undefined, htmlFor=undefined} ) => {
+const Label: React.FC<ILabel> = ( {text, className = undefined, htmlFor=undefined} ) => {
     return (
         <label 
             className={className} 

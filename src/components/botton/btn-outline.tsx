@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IBtn } from "../../typescript/interface/btn/btn.interfaces";
+import type { IBtn } from "../../typescript/interface/html/html.interfaces";
 
 const BtnOutLine:React.FC<IBtn> = ( {
     type="button",

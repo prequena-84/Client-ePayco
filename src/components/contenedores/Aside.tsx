@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IAside } from "../../typescript/interface/container/aside.interfaces"; //IAside";
+import type { IAside } from "../../typescript/interface/html/html.interfaces";
 
 const Aside: React.FC<IAside> = ({
     keyAside = undefined,

@@ -16,6 +16,7 @@ import type {
     TId,
     TOnChange,
     TType,
+    TTypeBtn,
     TArialLabel,
     TValueSTR,
     TValueNUM,
@@ -117,7 +118,7 @@ interface IForm {
     onLoginSuccess?:TOnLoginSuccesstype;
 }
 
-interface Ifieldset {
+interface IFieldset {
     key?:TKey | undefined;
     children?:TChildren;
     className?: TClassName | undefined;
@@ -149,7 +150,7 @@ interface IAside {
 
 interface IBtn {
     key?:TKey | undefined;
-    type?: TType | undefined;
+    type?: TTypeBtn | undefined;
     className?:TClassName | null;
     text?:TText | null;
     variantLine?: TVariantLine | null;
@@ -169,7 +170,7 @@ interface IBtnA {
     disabled?:TDisabled;
     arialDisabled?:TArialDisabled;
     sizes?:TSizes;
-    onClick?:TOnClick;
+    onClick?:TOnClick | undefined;
 }
 
 
@@ -186,7 +187,7 @@ export type {
     ILegend,
     ILabel,
     IForm,
-    Ifieldset,
+    IFieldset,
     ISection,
     IHeader,
     IDiv,

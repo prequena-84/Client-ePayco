@@ -1,10 +1,10 @@
 import type { InputHTMLAttributes } from "react"
-import type { ReactNode, ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react"
+import type { ReactNode, ChangeEventHandler, FormEventHandler } from "react"
 
 type TName = string; 
 type TKey = string; 
 type TId = string; 
-type TType = "text" | "number" | "password" | "email" | "url" | "number" | "date" | "checkbox" | "radio" | "radio" | "file" | "submit";
+type TType = "text" | "number" | "password" | "email" | "url" | "number" | "date" | "checkbox" | "radio" | "radio" | "file" | "submit" ;
 type TClassName = string; 
 type TClassInput = string; 
 type TPlaceHolder = string; 
@@ -30,7 +30,7 @@ type TVariantLine = 'btn-primary' | 'btn-secondary' | 'btn-success' | 'btn-dange
 type TVariantOutLine ='btn-outline-primary' | 'btn-outline-secondary' | 'btn-outline-success' | 'btn-outline-danger' | 'btn-outline-warning' | 'btn-outline-info' | 'btn-outline-light' | 'btn-outline-dark';
 type TSizes = 'btn-lg' | 'btn-sm';
 type TAriaDisabled = string;
-type TOnClick = MouseEventHandler<HTMLButtonElement>;
+type TOnClick = React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
 type TRole = "button";
 type TVariant = 'btn-primary' | 'btn-secondary' | 'btn-success' | 'btn-danger' | 'btn-warning' | 'btn-light' | 'btn-dark' | 'btn-link';
 type TArialDisabled = boolean;

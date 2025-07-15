@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IBtnA } from "../../typescript/interface/btn/btn.a.interfaces";
+import type { IBtnA } from "../../typescript/interface/html/html.interfaces";
 
 const BtnA:React.FC<IBtnA> = ( {
     role=undefined,

@@ -1,10 +1,5 @@
-// Importacion de hooks y componentes de React
 import React, { useState } from "react";
-
-// Importación de interfaces
-import type { IInputPassword } from "../../typescript/interface/input/password.interfaces";
-
-// Importación de css modular
+import type { IInputPassword } from "../../typescript/interface/html/html.interfaces";
 import styles from "../../css/module/input/input-password.module.css";
 
 const InputPassword: React.FC<IInputPassword> = ({

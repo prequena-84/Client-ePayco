@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IDiv } from "../../typescript/interface/container/div.interfaces";
+import type { IDiv } from "../../typescript/interface/html/html.interfaces";
 
 const Div: React.FC<IDiv> = ( {children, className = undefined} ) => {
     return(

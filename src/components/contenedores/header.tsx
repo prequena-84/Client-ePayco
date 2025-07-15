@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de interfaces
-import type { IHeader } from "../../typescript/interface/container/header.interfaces";
+import type { IHeader } from "../../typescript/interface/html/html.interfaces";
 
 const Header: React.FC<IHeader> = ( {children, className = undefined} ) => {
     return(

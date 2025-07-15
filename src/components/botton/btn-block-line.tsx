@@ -1,12 +1,7 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de Componentes
 import Div from "../contenedores/Div";
 import BtnLine from "./btn-line";
-
-// Importación de interfaces
-import type { IBtn } from "../../typescript/interface/btn/btn.interfaces";
+import type { IBtn } from "../../typescript/interface/html/html.interfaces";
 
 const BtnBlockLine: React.FC<IBtn> = ( {
     type, 

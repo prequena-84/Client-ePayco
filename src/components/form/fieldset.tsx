@@ -1,10 +1,7 @@
-// Importacion de hooks y componentes de React
 import React from "react";
+import type { IFieldset } from "../../typescript/interface/html/html.interfaces";
 
-// Importación de interfaces
-import type { Ifieldset } from "../../typescript/interface/forms/fieldset.interfaces";
-
-const Fieldset:React.FC<Ifieldset> = ( {children, className = undefined} ) => {
+const Fieldset:React.FC<IFieldset> = ( {children, className = undefined} ) => {
     return (
         <fieldset 
             className={className}

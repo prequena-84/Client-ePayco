@@ -1,10 +1,7 @@
-// Importacion de hooks y componentes de React
 import React from "react";
+import type { ISelect } from "../../typescript/interface/html/html.interfaces";
 
-// Importación de interfaces
-import type { Iselect } from "../../typescript/interface/select/select.interfaces";
-
-const SelectTipoTransaccion: React.FC<Iselect> = ( {name=undefined,key=undefined, className = undefined, value, onChange} ) => {
+const SelectTipoTransaccion: React.FC<ISelect> = ( {name=undefined,key=undefined, className = undefined, value, onChange} ) => {
     return (
       <select 
         name={name}

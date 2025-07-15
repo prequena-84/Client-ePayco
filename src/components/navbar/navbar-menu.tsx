@@ -1,13 +1,10 @@
-// Importacion de hooks y componentes de React
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-// Importación de interfaces
-import type { INavBar, Menu } from "../../typescript/interface/nav-bar/nav-bar.interfaces";
+import type { INavBar, IMenu } from "../../typescript/interface/html/html.interfaces"; //INavBar, Menu
 
 const NavBar: React.FC<INavBar> = ( {titleBrand="Menu", titleNavbar = "Menu"} ) => {
 
-    const [ menu, setMenu ] = useState<Menu[]>([]);
+    const [ menu, setMenu ] = useState<IMenu[]>([]);
 
     useEffect( () => {
         fetch("/config-nav-bar.json")

@@ -1,8 +1,5 @@
-// Importacion de hooks y componentes de React
 import React from "react";
-
-// Importación de Interfaces
-import type { IH2 } from "../../typescript/interface/titles/Ih2";
+import type { IH2 } from "../../typescript/interface/html/html.interfaces";
 
 const H2: React.FC<IH2> = ( {text="", className = undefined} ) => {
     return (
