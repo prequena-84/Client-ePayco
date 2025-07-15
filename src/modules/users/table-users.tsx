@@ -1,6 +1,6 @@
 import React from "react";
 import H1 from "../../components/title/h1";
-import type { IPropsUser } from "../../typescript/interface/users/state.users.interfaces";
+import type { IPropsUser } from "../../typescript/interface/users/props.users.interfaces";
 
 const TablaUsuarios: React.FC<IPropsUser> = ( {dataUsers} ) => {
     const data = dataUsers?.map( items => {

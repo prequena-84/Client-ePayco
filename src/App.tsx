@@ -1,6 +1,6 @@
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import NavBar from "./components/navbar/navbar-menu";
-import Home from "./modules/main/inicio"; // ok
+import Home from "./modules/main/home"; // ok
 import FormAddUsers from "./modules/users/add-users"; // ok
 import GetUsers from "./modules/users/get-users"; // ok
 import FormAddTransaction from "./modules/transaction/add-transaction"; // ok
