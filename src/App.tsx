@@ -4,7 +4,7 @@ import Home from "./modules/main/home"; // ok
 import FormAddUsers from "./modules/users/add-users"; // ok
 import GetUsers from "./modules/users/get-users"; // ok
 import FormAddTransaction from "./modules/transaction/add-transaction"; // ok
-import VerifyTransaction from "./modules/validar-transaccion/validar-token"; // ok
+import VerifyTransaction from "./modules/transaction/verify-transaction"; // ok
 
 function App() {
   return (
