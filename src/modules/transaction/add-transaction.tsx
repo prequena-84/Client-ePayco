@@ -1,10 +1,5 @@
-// Importacion de react
 import React, { useState } from "react";
-
-// Importacion de hook axios para hacer peticiones al servidor
-import axios from "axios";
-
-// Importacion Componentes
+import requestFecth from "../../utils/fetch.utils";
 import Form from "../../components/form/form";
 import Fieldset from "../../components/form/fieldset";
 import Div from "../../components/contenedores/Div";
@@ -13,103 +8,71 @@ import BtnOutLine from "../../components/botton/btn-outline";
 import BtnLine from "../../components/botton/btn-line";
 import Input from "../../components/input/input";
 import SelectTipoTransaccion from "../../components/select/select-tipo";
-
-// Importacion de Estilos
 import stylesForm from "../../css/module/login/login-registro.module.css";
+import type { IForm } from "../../typescript/interface/html/html.interfaces";
+import type { IStateTransaction } from "../../typescript/interface/transaction/state.transaction.interfaces";
+import type { IReportTransaction } from "../../typescript/interface/transaction/transaction.report.interfaces";
+import Loading from "../../components/spinners/spinners"; // Importacion del spinner para la espera
 
-// Importacion de interfaces
-import type { Iform } from "../../typescript/interface/forms/form.interfaces";
-import type { ITransaccion } from "../../typescript/interface/transaction/transaction.interfaces";
+const FormAddTransaction:React.FC<IForm> = () => {
+    const [ loadingInfo, setLoadingInfo ] = useState<boolean>(false);
 
-// Importacion del spinner para la espera
-import Loading from "../../components/spinners/spinners";
-
-//Importacion de URI API
-const uriAgregaTransaccion = import.meta.env.VITE_API_REGISTRO_TRANSACCIONES;
-
-const FormRegistroTransaccion: React.FC<Iform> = () => {
-
-    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(false);
-
-    const [ datoTransaccion, setDatoTransaccion ] = useState<ITransaccion>({
-        usuario_doc:'',
-        tipo: 'recarga',
-        monto: 0,
+    const [ dateTransaction, setDateTransaction ] = useState<IStateTransaction>({
+        userDocument:'',
+        type: 'recarga',
+        amount: 0,
         status: 'pendiente',
-        celular:'',
+        phone:'',
     });
 
-    const handlerChangeTipo = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handlerChangeTipo = (event:React.ChangeEvent<HTMLSelectElement>) => {
         const { name,value } = event.target;
 
-        setDatoTransaccion(prevData => ({
+        setDateTransaction( (prevData:IStateTransaction) => ({
             ...prevData,
             [name]:value,
             status: value === 'recarga' ? 'confirmada' : 'pendiente',
         }));
     };
 
-    const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
 
-        setDatoTransaccion( prevData  => ({
+        setDateTransaction( (prevData:IStateTransaction) => ({
             ...prevData,
             [name]: name !=='monto' ? value : Number(value)
         }));
     };
 
     const clearForm = () => {
-        setDatoTransaccion({
-            usuario_doc:'',
-            tipo:'recarga',
-            monto:0,
-            celular:'',
+        setDateTransaction({
+            userDocument:'',
+            type:'recarga',
+            amount:0,
+            phone:'',
             status:'pendiente',
         });
     };
     
-    const handleSubmit = async ( e: React.FormEvent ) => {
-        e.preventDefault();  
-        setCargandoInfo(true);
+    const handleSubmit = async ( event: React.FormEvent ) => {
+        event.preventDefault();  
+        setLoadingInfo(true);
 
-        if ( (datoTransaccion.usuario_doc !== '' && datoTransaccion.celular !== '' && datoTransaccion.monto !== 0 ) || 
-             (datoTransaccion.usuario_doc !== '' && datoTransaccion.celular === '' && datoTransaccion.monto !== 0) 
-        ) {
+        const { userDocument, phone, amount }:IStateTransaction = dateTransaction;
 
+        if ( userDocument !== '' && phone !== '' && amount !== 0  || userDocument !== '' && phone === '' && amount !== 0 ) {
             try {
-                const response = await axios.post(uriAgregaTransaccion, {
-                    datoTransaccion
-                });
-
-                setCargandoInfo(false)
-                alert( response.data.message );
+                const response:string = await requestFecth<IReportTransaction>(import.meta.env.VITE_API_ADD_TRANSACTION).then( resp => resp.message)
+                setLoadingInfo(false)
+                alert( response );
                 clearForm();
-
             } catch( err) {
-                setCargandoInfo(false);
-                if (axios.isAxiosError(err)) {
-                    // Si el error es un error de Axios
-                    if (err.response) {
-                        // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
-                        console.error('Error de respuesta:', err.response.data.message);
-                        console.error('Código de estado:', err.response.status);
-                        alert( err.response.data.message )
-
-                    } else if (err.request) {
-                        // La solicitud se realizó pero no se recibió respuesta
-                        console.error('Error de solicitud:', err.request);
-                    } else {
-                        // Algo sucedió al configurar la solicitud que lanzó un error
-                        console.error('Error:', err.message);
-                    }
-                } else {
-                    // Manejar otros tipos de errores
-                    console.error('Error no relacionado con Axios:', err);
-                };
+                setLoadingInfo(false);
+                console.error(`Ha ocurrido un error el siguiente error: ${err}`)
             };
         } else {
             alert('Por favor ingrese todos los datos de la "Transacción" para completar el registro')
-            setCargandoInfo(false);
+            setLoadingInfo(false);
         };
     };
 
@@ -118,15 +81,15 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
             <Form key="formulario-login" onSubmit={handleSubmit} className={`${stylesForm["container-Form"]} main-content`}>
                 <Fieldset className={stylesForm.containerFieldset}>
                     <Legend key="titulo" text="Registro de Transaccion"/>
-                    {cargadoInfo ? (
+                    {loadingInfo ? (
                         <Loading />
                     ) : (
                         <>
                             <Div key="tipo">
                                 <SelectTipoTransaccion
                                     name="tipo"
-                                    value={datoTransaccion.tipo}
-                                    onChange={(e) => handlerChangeTipo(e)}
+                                    value={dateTransaction.type}
+                                    onChange={(e:React.ChangeEvent<HTMLSelectElement>) => handlerChangeTipo(e)}
                                 />
                             </Div>
                                 <Div key="usuario_doc">
@@ -136,13 +99,13 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                                     id="usuario_doc"
                                     placeHolder="Documento del Usuario"
                                     arialLabel="usuario_doc"
-                                    value={datoTransaccion.usuario_doc}
-                                    onChange={ (e) => handleChange(e) }
+                                    value={dateTransaction.userDocument}
+                                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                     className={stylesForm.containerInputUserName}
                                     classInput={stylesForm.inputUserName}
                                 />
                             </Div>
-                            {datoTransaccion.tipo === "recarga" && 
+                            {dateTransaction.type === "recarga" && 
                                 <Div key="celular">
                                     <Input
                                         key="celular"
@@ -151,8 +114,8 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                                         type="text"
                                         placeHolder="Celular"
                                         arialLabel="celular"
-                                        value={datoTransaccion.celular}
-                                        onChange={ (e) => handleChange(e) }
+                                        value={dateTransaction.phone}
+                                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                         className={stylesForm.containerInputUserName}
                                         classInput={stylesForm.inputUserName}
                                     />
@@ -166,13 +129,13 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                                     type="number"
                                     placeHolder="Monto"
                                     arialLabel="monto"
-                                    value={datoTransaccion.monto}
-                                    onChange={ (e) => handleChange(e) }
+                                    value={dateTransaction.amount}
+                                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                     className={stylesForm.containerInputUserName}
                                     classInput={stylesForm.inputUserName}
                                 />
                             </Div>
-                            {datoTransaccion.tipo !== "recarga" &&
+                            {dateTransaction.type !== "recarga" &&
                                 <Div key="status">
                                     <label>Estado del Pago</label>
                                     <Input
@@ -181,8 +144,8 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
                                         id="status"
                                         placeHolder="Estado"
                                         arialLabel="status Disabled input example"
-                                        value={datoTransaccion.status}
-                                        onChange={ (e) => handleChange(e) }
+                                        value={dateTransaction.status}
+                                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                         className={stylesForm.containerInputUserName}
                                         classInput={stylesForm.inputUserName}
                                         disabled={true}
@@ -212,4 +175,4 @@ const FormRegistroTransaccion: React.FC<Iform> = () => {
     );
 };
 
-export default FormRegistroTransaccion;
+export default FormAddTransaction;

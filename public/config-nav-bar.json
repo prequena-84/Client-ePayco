@@ -13,11 +13,11 @@
         "submenu":[
             {
                 "label": "Registro",
-                "link": "/add-user"
+                "link": "/add-users"
             },
             {
                 "label": "Consulta",
-                "link": "/consulta-usuario"
+                "link": "/get-users"
             }
         ]
     },
@@ -26,7 +26,7 @@
         "submenu":[
             {
                 "label": "Nueva Transacción",
-                "link": "/registro-transaccion"
+                "link": "/add-transactions"
             }
         ]
     },

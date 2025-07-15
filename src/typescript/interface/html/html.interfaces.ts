@@ -33,10 +33,6 @@ import type {
     TArialDisabled,
 } from "../../types/html/html.types";
 
-import type { T__v, T_id } from "../../types/mongoose/mongoose.types";
-import type { IUser } from "../users/users.interfaces";
-import type { IReportTransaction } from "../transaction/transaction.report.interfaces";
-
 interface IH1 {
     key?:TKey | undefined;
     text:TText;
@@ -44,20 +40,6 @@ interface IH1 {
 }
 
 interface IH2 extends IH1{}
-
-interface ITableUsers extends IUser {
-    __v?: T__v | null;
-    _id?: T_id | null;
-}
-
-// Anterior dataUser
-interface stateUser {
-    data: ITableUsers[];
-}
-
-interface ITableTransaction {
-    dataTransaction:IReportTransaction[];
-}
 
 interface ISelect {
     name?:TName | undefined;
@@ -194,9 +176,6 @@ interface IBtnA {
 export type {
     IH1,
     IH2,
-    ITableUsers,
-    stateUser,
-    ITableTransaction,
     ISelect,
     ISubMenu,
     IMenu,

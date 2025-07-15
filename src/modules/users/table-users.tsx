@@ -1,18 +1,16 @@
 import React from "react";
 import H1 from "../../components/title/h1";
+import type { IPropsUser } from "../../typescript/interface/users/state.users.interfaces";
 
-import type { tablaUsuarios } from "../../typescript/interface/users/users.report.interfaces.tsx.tsx";
-
-const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
-
-    const data = datosUsuario?.map( items => {
+const TablaUsuarios: React.FC<IPropsUser> = ( {dataUsers} ) => {
+    const data = dataUsers?.map( items => {
         return {
-            Documento:items.documento,
-            Nombre:items.nombre,
+            Documento:items.document,
+            Nombre:items.name,
             Email:items.email,
-            Celular:items.celular,
-            Saldo:items.saldo,
-        }
+            Celular:items.phone,
+            Saldo:items.balance ?? 0,
+        };
     });
 
    const title = data?.map( item => Object.keys(item) )[0] || [];
@@ -23,25 +21,25 @@ const TablaUsuarios: React.FC<tablaUsuarios> = ( {datosUsuario} ) => {
                 <table className="table">
                     <thead>
                         <tr>
-                            {title.map( (titulo,index) => (<th key={`title-${index}`} scope="col">{titulo}</th>))}
+                            {title.map( (title,index) => (<th key={`title-${index}`} scope="col">{title}</th>))}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map( (item,index) => (
                             <tr key={`row-${index}`}>
-                                <th key={`Documento-${index}`} scope="row">
+                                <th key={`document-${index}`} scope="row">
                                     {item.Documento}
                                 </th >
-                                <td key={`Nombre-${index}`}>
+                                <td key={`name-${index}`}>
                                     {item.Nombre}
                                 </td>
-                                <td key={`Email-${index}`}>
+                                <td key={`email-${index}`}>
                                     {item.Email}
                                 </td>
-                                <td key={`Celular-${index}`}>
+                                <td key={`phone-${index}`}>
                                     {item.Celular}
                                 </td>
-                                <td key={`Saldo-${index}`}>
+                                <td key={`balance-${index}`}>
                                     {item.Saldo.toFixed(2)}
                                 </td>
                             </tr>

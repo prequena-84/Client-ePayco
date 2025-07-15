@@ -32,9 +32,9 @@ type TSizes = 'btn-lg' | 'btn-sm';
 type TAriaDisabled = string;
 type TOnClick = MouseEventHandler<HTMLButtonElement>;
 type TRole = "button";
-type TVariant = 'btn-primary' | 'btn-secondary' | 'btn-success' | 'btn-danger' | 'btn-warning' | 'btn-light' | 'btn-dark' | 'btn-link' | null;
+type TVariant = 'btn-primary' | 'btn-secondary' | 'btn-success' | 'btn-danger' | 'btn-warning' | 'btn-light' | 'btn-dark' | 'btn-link';
 type TArialDisabled = boolean;
-type TOnClickBtn = ( e:React.FormEvent ) => void | undefined;
+type TOnClickBtn = ( e:React.FormEvent ) => void;
 
 export type {
     TName,

@@ -1,7 +1,7 @@
 import _React, { useEffect, useState } from "react";
 import Section from "../../components/contenedores/section";
 import H1 from "../../components/title/h1";
-import TablaTransacciones from "../tables/tabla-transacciones";
+import TablaTransacciones from "../transaction/tabla-transacciones.tsx";
 import Loading from "../../components/spinners/spinners";
 import requestFecth from "../../utils/fetch.utils.tsx";
 import type { IReportTransaction } from "../../typescript/interface/transaction/transaction.report.interfaces.tsx";

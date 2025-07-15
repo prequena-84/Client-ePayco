@@ -1,7 +1,7 @@
 import type { TIdTransaction,TUserDocument,TTransaction,TAmount,TStatus,TTokenConfirmation,TSessionExp } from "../../types/transactions/transaction.types";
 
 interface ITransaction {
-    id:TIdTransaction;
+    id?:TIdTransaction;
     userDocument:TUserDocument;
     type:TTransaction ;
     amount:TAmount ;

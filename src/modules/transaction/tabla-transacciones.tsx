@@ -1,14 +1,14 @@
 import React from "react";
 import H1 from "../../components/title/h1";
 
-import type { ITableTransaction } from "../../typescript/interface/html/html.interfaces";
+import type { ITableTransaction } from "../../typescript/interface/transaction/tabla.transaction.interfaces";
 
-const TablaTransacciones: React.FC<ITableTransaction> = ( {dataTransaction} ) => {
+const TablaTransacciones: React.FC<ITableTransaction> = ({ dataTransaction }) => {
 
-    const data = dataTransaction?.map( items => {
+    const data = dataTransaction?.map(items => {
         return {
             Documento:items.userDocument,
-            Usuario:items.users.name,
+            Usuario:items.users?.name,
             "Id Transaccion":items.id,
             "Tipo Transaccion":items.type,
             Monto:items.amount,
@@ -16,7 +16,7 @@ const TablaTransacciones: React.FC<ITableTransaction> = ( {dataTransaction} ) =>
         };
     });
 
-   const title = data?.map( item => Object.keys(item) )[0];
+   const title = data?.map(item => Object.keys(item))[0];
 
     return (
         <>

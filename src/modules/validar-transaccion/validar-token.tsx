@@ -1,6 +1,7 @@
 //import React from "react";
 import React, { useState } from "react";
-import axios, { isAxiosError} from "axios";
+
+import requestFecth from "../../utils/fetch.utils";
 
 import Form from "../../components/form/form";
 import Input from "../../components/input/input";
@@ -13,24 +14,24 @@ import BtnLine from "../../components/botton/btn-line";
 // Importacion de Estilos
 import stylesForm from "../../css/module/login/login-registro.module.css";
 
-import type { Iform } from "../../typescript/interface/forms/form.interfaces";
-import type { IToken } from "../../typescript/interface/token/token.interfaces";
+import type { IForm } from "../../typescript/interface/html/html.interfaces";
+import type { IToken } from "../../typescript/interface/token/token.interfaces"
 
 
 // Importacion del spinner para la espera
 import Loading from "../../components/spinners/spinners";
 
 // Importacion URI Confirmar Transaccion 
-const uriConfirmarTransaccion = import.meta.env.VITE_API_CONFIRMAR_TRANSACCION
-const uriSolitudToken = import.meta.env.VITE_API_SOLICITAR_TOKEN
+// const uriConfirmarTransaccion = import.meta.env.VITE_API_CONFIRMATION_TRANSACTION
+// const uriSolitudToken = import.meta.env.VITE_API_GET_TOKEN
 
-const ValidarTransaccion: React.FC<Iform> = () => {
+const ValidarTransaccion: React.FC<IForm> = () => {
 
-    const [ cargadoInfo, setCargandoInfo ] = useState<boolean>(false);
+    const [ loadingInfo, setLoadingInfo ] = useState<boolean>(false);
 
     const [ data, setData ] = useState<IToken>({
         token:'',
-        documento:'',
+        document:'',
         id:'',  
     });
 
@@ -47,14 +48,14 @@ const ValidarTransaccion: React.FC<Iform> = () => {
     const clearForm = () => {
         setData({
             token:'',
-            documento:'',
+            document:'',
             id:'',
         });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); 
-        setCargandoInfo(true);
+        setLoadingInfo(true);
 
         if ( data.documento !== '' && data.id !== '' && data.token !== '' ) {
 
@@ -70,12 +71,12 @@ const ValidarTransaccion: React.FC<Iform> = () => {
                     },
                 })
 
-                setCargandoInfo(false)
+                setLoadingInfo(false)
                 alert(responseConfirmacion.data.message)
                 clearForm();
 
             } catch(err) {
-                setCargandoInfo(false);
+                setLoadingInfo(false);
 
                 if (isAxiosError(err)) {
 
@@ -91,13 +92,13 @@ const ValidarTransaccion: React.FC<Iform> = () => {
             };
         } else {
             alert('Ingrese los datos del Documento, Id de la Transacción y Token para enviar la autorización de la transacción')
-            setCargandoInfo(false);
+            setLoadingInfo(false);
         }
     };
 
     const solicitarToken = async () => {
         try {
-            setCargandoInfo(true);
+            setLoadingInfo(true);
 
             if ( data.documento !== '' && data.id !== '' ) {
 
@@ -107,16 +108,16 @@ const ValidarTransaccion: React.FC<Iform> = () => {
                 };           
                 
                 const responseToken = await axios.post(uriSolitudToken, body);
-                setCargandoInfo(false);
+                setLoadingInfo(false);
                 alert(responseToken.data.data)
 
             } else {
                 alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
-                setCargandoInfo(false);
+                setLoadingInfo(false);
             };
 
         } catch( err: any  ) {
-            setCargandoInfo(false);
+            setLoadingInfo(false);
             console.error(err)
             alert(err.response.data.message)
         }
@@ -126,7 +127,7 @@ const ValidarTransaccion: React.FC<Iform> = () => {
         <Form key="formulario-token" onSubmit={handleSubmit} className={`${stylesForm["container-Form"]} main-content`}>
             <Fieldset className={stylesForm.containerFieldset}>
                 <Legend key="titulo" text="Confirmación de Pago"/>
-                {cargadoInfo ? (
+                {loadingInfo ? (
                     <Loading />
                 ) : (
                     <>
