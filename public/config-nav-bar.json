@@ -35,7 +35,7 @@
         "submenu":[
             {
                 "label": "Confirmar Token",
-                "link": "/confirmacion-transaccion"
+                "link": "/verify-transaction"
             }
         ]
     }

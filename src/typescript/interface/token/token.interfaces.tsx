@@ -5,7 +5,7 @@ import type { TToken } from "../../types/token/token.types";
 interface IToken {
     document:TDocument;
     id: TIdTransaction;
-    token: TToken;
+    token?: TToken;
 }
 
 export type {

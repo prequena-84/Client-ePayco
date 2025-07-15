@@ -1,8 +1,5 @@
-//import React from "react";
 import React, { useState } from "react";
-
 import requestFecth from "../../utils/fetch.utils";
-
 import Form from "../../components/form/form";
 import Input from "../../components/input/input";
 import Fieldset from "../../components/form/fieldset";
@@ -10,43 +7,31 @@ import Div from "../../components/contenedores/Div";
 import Legend from "../../components/form/legend";
 import BtnOutLine from "../../components/botton/btn-outline";
 import BtnLine from "../../components/botton/btn-line";
-
-// Importacion de Estilos
 import stylesForm from "../../css/module/login/login-registro.module.css";
-
 import type { IForm } from "../../typescript/interface/html/html.interfaces";
 import type { IToken } from "../../typescript/interface/token/token.interfaces"
+import Loading from "../../components/spinners/spinners"; // Importacion del spinner para la espera
 
-
-// Importacion del spinner para la espera
-import Loading from "../../components/spinners/spinners";
-
-// Importacion URI Confirmar Transaccion 
-// const uriConfirmarTransaccion = import.meta.env.VITE_API_CONFIRMATION_TRANSACTION
-// const uriSolitudToken = import.meta.env.VITE_API_GET_TOKEN
-
-const ValidarTransaccion: React.FC<IForm> = () => {
-
+const VerifyTransaction: React.FC<IForm> = () => {
     const [ loadingInfo, setLoadingInfo ] = useState<boolean>(false);
 
-    const [ data, setData ] = useState<IToken>({
+    const [ dataToken, setDataToken ] = useState<IToken>({
         token:'',
         document:'',
         id:'',  
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name,value } = event.target;
+        const { name, value } = event.target;
 
-        setData(prevData => ({
+        setDataToken((prevData:IToken) => ({
             ...prevData,
             [name]:value,
         }));
     };
 
-    // esta sin usar
     const clearForm = () => {
-        setData({
+        setDataToken({
             token:'',
             document:'',
             id:'',
@@ -57,38 +42,24 @@ const ValidarTransaccion: React.FC<IForm> = () => {
         e.preventDefault(); 
         setLoadingInfo(true);
 
-        if ( data.documento !== '' && data.id !== '' && data.token !== '' ) {
+        const { document, id, token }:IToken = dataToken;
 
-            const body = {
-                documento:data.documento,
-                id:data.id
-            }
+        if (document !== '' && id !== '' && token !== '') {
+            const body = { document, id };
 
             try {
-                const responseConfirmacion = await axios.post(uriConfirmarTransaccion, body, {
-                    headers: {
-                        Authorization: `Bearer ${data.token}`,
-                    },
-                })
+                const respConfirmation:string = await requestFecth<IToken>(import.meta.env.VITE_API_GET_TOKEN,"POST", body, {
+                    'Content-Type':'application/json',
+                    Authorization: `Bearer ${dataToken.token}`,
+                }).then( resp => resp.message );
 
                 setLoadingInfo(false)
-                alert(responseConfirmacion.data.message)
+                alert(respConfirmation)
                 clearForm();
 
             } catch(err) {
                 setLoadingInfo(false);
-
-                if (isAxiosError(err)) {
-
-                    if (err.response) {
-                        alert(err.response.data.message)
-                        console.error('mensaje', err.response.data.message);
-                    } else {
-                        console.error('Error de solicitud:', err.request);
-                    };
-                } else {
-                    console.error('Error no relacionado con Axios:', err);
-                };
+                console.error('Error de solicitud:', err);
             };
         } else {
             alert('Ingrese los datos del Documento, Id de la Transacción y Token para enviar la autorización de la transacción')
@@ -99,17 +70,13 @@ const ValidarTransaccion: React.FC<IForm> = () => {
     const solicitarToken = async () => {
         try {
             setLoadingInfo(true);
+            const { document, id }:IToken = dataToken;
 
-            if ( data.documento !== '' && data.id !== '' ) {
-
-                const body = {
-                    documento:data.documento,
-                    id:data.id
-                };           
-                
-                const responseToken = await axios.post(uriSolitudToken, body);
+            if ( document !== '' && id !== '' ) {
+                const body = { document, id };           
+                const response:string = await requestFecth<IToken>(import.meta.env.VITE_API_CONFIRMATION_TRANSACTION,"POST", body).then( resp => resp.message ); 
                 setLoadingInfo(false);
-                alert(responseToken.data.data)
+                alert(response)
 
             } else {
                 alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
@@ -138,8 +105,8 @@ const ValidarTransaccion: React.FC<IForm> = () => {
                                 id="documento"
                                 placeHolder="Documento del Usuario"
                                 arialLabel="documento"
-                                value={data.documento}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataToken.document}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesForm.containerInputUserName}
                                 classInput={stylesForm.inputUserName}
                             />
@@ -152,8 +119,8 @@ const ValidarTransaccion: React.FC<IForm> = () => {
                                 id="id"
                                 placeHolder="Id Transacción"
                                 arialLabel="id"
-                                value={data.id}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataToken.id}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesForm.containerInputUserName}
                                 classInput={stylesForm.inputUserName}
                             />
@@ -165,8 +132,8 @@ const ValidarTransaccion: React.FC<IForm> = () => {
                                 id="token"
                                 placeHolder="Ingrese Token"
                                 arialLabel="token"
-                                value={data.token}
-                                onChange={ (e) => handleChange(e) }
+                                value={dataToken.token}
+                                onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesForm.containerInputUserName}
                                 classInput={stylesForm.inputUserName}
                             />
@@ -195,4 +162,4 @@ const ValidarTransaccion: React.FC<IForm> = () => {
     )
 };
 
-export default ValidarTransaccion;
+export default VerifyTransaction;
