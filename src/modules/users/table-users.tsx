@@ -12,7 +12,7 @@ const TablaUsuarios: React.FC<IPropsUser> = ( {dataUsers} ) => {
             Saldo:items.balance ?? 0,
         };
     });
-
+    
    const title = data?.map( item => Object.keys(item) )[0] || [];
 
     return (

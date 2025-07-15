@@ -11,7 +11,6 @@ import SelectTipoTransaccion from "../../components/select/select-tipo";
 import stylesForm from "../../css/module/login/login-registro.module.css";
 import type { IForm } from "../../typescript/interface/html/html.interfaces";
 import type { IStateTransaction } from "../../typescript/interface/transaction/state.transaction.interfaces";
-import type { IReportTransaction } from "../../typescript/interface/transaction/transaction.report.interfaces";
 import Loading from "../../components/spinners/spinners"; // Importacion del spinner para la espera
 
 const FormAddTransaction:React.FC<IForm> = () => {
@@ -21,7 +20,7 @@ const FormAddTransaction:React.FC<IForm> = () => {
         userDocument:'',
         type: 'recarga',
         amount: 0,
-        status: 'pendiente',
+        status: 'confirmada',
         phone:'',
     });
 
@@ -50,7 +49,7 @@ const FormAddTransaction:React.FC<IForm> = () => {
             type:'recarga',
             amount:0,
             phone:'',
-            status:'pendiente',
+            status:"confirmada",
         });
     };
     
@@ -60,9 +59,11 @@ const FormAddTransaction:React.FC<IForm> = () => {
 
         const { userDocument, phone, amount }:IStateTransaction = dateTransaction;
 
+        console.log(typeof dateTransaction.amount)
+
         if ( userDocument !== '' && phone !== '' && amount !== 0  || userDocument !== '' && phone === '' && amount !== 0 ) {
             try {
-                const response:string = await requestFecth<IReportTransaction>(import.meta.env.VITE_API_ADD_TRANSACTION).then( resp => resp.message)
+                const response:string = await requestFecth<IStateTransaction>(import.meta.env.VITE_API_ADD_TRANSACTION, "POST", dateTransaction).then( resp => resp.message)
                 setLoadingInfo(false)
                 alert( response );
                 clearForm();
@@ -85,20 +86,20 @@ const FormAddTransaction:React.FC<IForm> = () => {
                         <Loading />
                     ) : (
                         <>
-                            <Div key="tipo">
+                            <Div key="type">
                                 <SelectTipoTransaccion
-                                    name="tipo"
+                                    name="type"
                                     value={dateTransaction.type}
                                     onChange={(e:React.ChangeEvent<HTMLSelectElement>) => handlerChangeTipo(e)}
                                 />
                             </Div>
-                                <Div key="usuario_doc">
+                                <Div key="userDocument">
                                 <Input
-                                    key="usuario_doc"
-                                    name="usuario_doc"
-                                    id="usuario_doc"
+                                    key="userDocument"
+                                    name="userDocument"
+                                    id="userDocument"
                                     placeHolder="Documento del Usuario"
-                                    arialLabel="usuario_doc"
+                                    arialLabel="userDocument"
                                     value={dateTransaction.userDocument}
                                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                     className={stylesForm.containerInputUserName}
@@ -106,14 +107,14 @@ const FormAddTransaction:React.FC<IForm> = () => {
                                 />
                             </Div>
                             {dateTransaction.type === "recarga" && 
-                                <Div key="celular">
+                                <Div key="phone">
                                     <Input
-                                        key="celular"
-                                        name="celular"
-                                        id="celular"
+                                        key="phone"
+                                        name="phone"
+                                        id="phone"
                                         type="text"
                                         placeHolder="Celular"
-                                        arialLabel="celular"
+                                        arialLabel="phone"
                                         value={dateTransaction.phone}
                                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                         className={stylesForm.containerInputUserName}
@@ -123,12 +124,12 @@ const FormAddTransaction:React.FC<IForm> = () => {
                             <Div key="monto">
                                 <label>Monto</label>
                                 <Input
-                                    key="monto"
-                                    name="monto"
-                                    id="monto"
+                                    key="amount"
+                                    name="amount"
+                                    id="amount"
                                     type="number"
                                     placeHolder="Monto"
-                                    arialLabel="monto"
+                                    arialLabel="amount"
                                     value={dateTransaction.amount}
                                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                                     className={stylesForm.containerInputUserName}
@@ -153,13 +154,14 @@ const FormAddTransaction:React.FC<IForm> = () => {
                                     </Div>}
                             <Div key="btn" className={stylesForm["container-btn-login"]}>
                                 <BtnOutLine 
-                                    key="registrar"
+                                    key="add"
                                     text={"Registrar"}
                                     type={"submit"}
                                     sizes={"btn-lg"}
                                     className={stylesForm.btnIngresar}
                                 />
-                                <BtnLine key="limpiar"
+                                <BtnLine 
+                                    key="clear"
                                     type={"button"}
                                     text="Limpiar"
                                     sizes={"btn-lg"}

@@ -89,11 +89,11 @@ const FormAddUsers: React.FC<IForm> = () => {
                     <Loading />
                 ) : (
                     <>
-                        <Div key="documento">
+                        <Div key="document">
                             <Input
-                                key="inpdocumentout"
-                                name="documento"
-                                id="documento"
+                                key="document"
+                                name="document"
+                                id="document"
                                 placeHolder="Documento"
                                 arialLabel="documento"
                                 value={dataUser.document}
@@ -102,13 +102,13 @@ const FormAddUsers: React.FC<IForm> = () => {
                                 classInput={stylesFormLogin.inputUserName}
                             />
                         </Div>
-                        <Div key="nombre">
+                        <Div key="name">
                             <Input
-                                key="nombre"
-                                name="nombre"
-                                id="nombre"
+                                key="name"
+                                name="name"
+                                id="name"
                                 placeHolder="Nombre"
-                                arialLabel="nombre"
+                                arialLabel="name"
                                 value={dataUser.name}
                                 onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
@@ -129,13 +129,13 @@ const FormAddUsers: React.FC<IForm> = () => {
                                 classInput={stylesFormLogin.inputUserName}
                             />
                         </Div>
-                        <Div key="celular">
+                        <Div key="phone">
                             <Input
-                                key="celular"
-                                name="celular"
-                                id="celular"
+                                key="phone"
+                                name="phone"
+                                id="phone"
                                 placeHolder="Celular"
-                                arialLabel="celular"
+                                arialLabel="phone"
                                 value={dataUser.phone}
                                 onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesFormLogin.containerInputUserName}
@@ -144,13 +144,14 @@ const FormAddUsers: React.FC<IForm> = () => {
                         </Div>
                         <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
                             <BtnOutLine 
-                                key="ingresar"
+                                key="add"
                                 text={"Registrar"}
                                 type={"submit"}
                                 sizes={"btn-lg"}
                                 className={stylesFormLogin.btnIngresar}
                             />
-                            <BtnLine key="limpiar"
+                            <BtnLine 
+                                key="clear"
                                 type={"button"}
                                 text="Limpiar"
                                 sizes={"btn-lg"}

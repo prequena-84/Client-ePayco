@@ -6,7 +6,7 @@ import type { T__v, T_id } from "../../types/mongoose/mongoose.types";
 interface IReportTransaction extends ITransaction {
   _id: T_id;
   __v: T__v;
-  users?: IUser;
+  User?: IUser;
 }
 
 export type {

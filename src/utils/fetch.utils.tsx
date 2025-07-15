@@ -10,7 +10,7 @@ export default async function requestFecth<TResponse, TRequestBody = TResponse> 
     }, 
 ):Promise<IFecth<TResponse>> {
 
-    if ( !uri ) throw new Error('URI no encontrada')
+    if ( !uri ) throw new Error('URI no encontrada');
     
     const response = await fetch(uri, {
         method,

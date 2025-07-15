@@ -6,8 +6,6 @@ import Loading from "../../components/spinners/spinners.tsx";
 import requestFecth from "../../utils/fetch.utils.tsx";
 import type { IReportTransaction } from "../../typescript/interface/transaction/transaction.report.interfaces.tsx";
 
-//const uriTransaction = import.meta.env.VITE_API_GET_TRANSACTION;
-
 const Home = () => {
     const [ report, setReport ] = useState<IReportTransaction[]> ([]);
     const [ loadingInfo, setLoadingInfo ] = useState<boolean> (true);

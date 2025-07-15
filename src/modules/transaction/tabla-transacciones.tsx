@@ -8,7 +8,7 @@ const TablaTransacciones: React.FC<ITableTransaction> = ({ dataTransaction }) =>
     const data = dataTransaction?.map(items => {
         return {
             Documento:items.userDocument,
-            Usuario:items.users?.name,
+            Usuario:items.User?.name,
             "Id Transaccion":items.id,
             "Tipo Transaccion":items.type,
             Monto:items.amount,
