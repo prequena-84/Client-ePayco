@@ -48,7 +48,10 @@ const VerifyTransaction: React.FC<IForm> = () => {
             const body = { document, id };
 
             try {
-                const respConfirmation:string = await requestFecth<IToken>(import.meta.env.VITE_API_GET_TOKEN,"POST", body, {
+                const respConfirmation:string = await requestFecth<IToken>(
+                    import.meta.env.VITE_API_CONFIRMATION_TRANSACTION, 
+                    "POST", 
+                    body, {
                     'Content-Type':'application/json',
                     Authorization: `Bearer ${dataToken.token}`,
                 }).then( resp => resp.message );
@@ -73,11 +76,10 @@ const VerifyTransaction: React.FC<IForm> = () => {
             const { document, id }:IToken = dataToken;
 
             if ( document !== '' && id !== '' ) {
-                const body = { document, id };           
-                const response:string = await requestFecth<IToken>(import.meta.env.VITE_API_CONFIRMATION_TRANSACTION,"POST", body).then( resp => resp.message ); 
+                const body = { document, id };       
+                const response:string = await requestFecth<IToken>(import.meta.env.VITE_API_GET_TOKEN,"POST", body).then( resp => resp.message ); 
                 setLoadingInfo(false);
                 alert(response)
-
             } else {
                 alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
                 setLoadingInfo(false);
@@ -98,13 +100,13 @@ const VerifyTransaction: React.FC<IForm> = () => {
                     <Loading />
                 ) : (
                     <>
-                        <Div key="documento">
+                        <Div key="document">
                             <Input
-                                key="documento"
-                                name="documento"
-                                id="documento"
+                                key="document"
+                                name="document"
+                                id="document"
                                 placeHolder="Documento del Usuario"
-                                arialLabel="documento"
+                                arialLabel="document"
                                 value={dataToken.document}
                                 onChange={ (e:React.ChangeEvent<HTMLInputElement>) => handleChange(e) }
                                 className={stylesForm.containerInputUserName}
