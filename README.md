@@ -35,6 +35,9 @@ Luego podras ejecutar el código de producción con el comando npm run server.
 ## Personalización de titulos navbar
 Para modificar el enunciados del menu y sub menos de la barrar de navegación se necesitara realizar los cambios en el archivo "config-nav-bar.json" ubicado en la ruta src/config/config-nav-bar.json.
 
+## Integración de nuevo modulos
+Para la integraciaón de nuevo modulo se importa los modulos en el Archivo "App.tsx" y luego se agrega su definición en Archivo Json "config-nav-bar.json" ubicado en la ruta src/config/config-nav-bar.json y tambien se define en la funcion "routerComponents" ya que el Json no tiene la capacidad importar archivos de React.ReactElement, es decir, componente de React, esta funcion se encarga de crear un renderizado mas practico para la escalabilidad y consistencia del proyecto.
+
 ## Inicio de la App
 Cuando ejecutes el inicio de la App veras la primera pantalla con las transacciones realizadas si las hay y los menus de navegacion consta de 4 opciones: Inicio, Registro de Usuarios, Registro de Transacciones y confirmación de trasacciones / token.
 
