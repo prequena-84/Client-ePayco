@@ -19,7 +19,7 @@ export default async function requestFecth<TResponse, TRequestBody = TResponse> 
     });
 
     const responseData = await response.json();
-    if ( !response.ok ) throw new Error(responseData.message.message || 'Error en la red o la solicitud falló');
+    if ( !response.ok ) throw new Error(responseData.message.message || 'Error en la red, datos o la solicitud falló');
 
     return {
         data:responseData.data,
