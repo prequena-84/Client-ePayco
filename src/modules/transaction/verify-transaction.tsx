@@ -71,25 +71,18 @@ const VerifyTransaction: React.FC<IForm> = () => {
     };
 
     const solicitarToken = async () => {
-        try {
-            setLoadingInfo(true);
-            const { document, id }:IToken = dataToken;
+        setLoadingInfo(true);
+        const { document, id }:IToken = dataToken;
 
-            if ( document !== '' && id !== '' ) {
-                const body = { document, id };       
-                const response:string = await requestFecth<IToken>(import.meta.env.VITE_API_GET_TOKEN,"POST", body).then( resp => resp.message ); 
-                setLoadingInfo(false);
-                alert(response)
-            } else {
-                alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
-                setLoadingInfo(false);
-            };
-
-        } catch( err: any  ) {
+        if ( document !== '' && id !== '' ) {
+            const body = { document, id };       
+            const response = await requestFecth<IToken>(import.meta.env.VITE_API_GET_TOKEN,"POST", body).then( resp => resp.message ).catch( err => err); 
             setLoadingInfo(false);
-            console.error(err)
-            alert(err.response.data.message)
-        }
+            alert(response)
+        } else {
+            alert('Ingrese los datos del Documento y Id de la Transacción para solicitar el token');
+            setLoadingInfo(false);
+        };
     };
 
     return (
